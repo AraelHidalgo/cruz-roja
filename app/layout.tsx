@@ -44,18 +44,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet" />
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-          @font-face {
-            font-family: 'Clash Display';
-            src: url('https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap');
-            font-weight: 600 700;
-            font-display: swap;
-          }
-        `,
-          }}
-        />
+        <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" rel="stylesheet" />
       </head>
       <body className={`${interTight.variable} font-inter antialiased`}>
         {children}

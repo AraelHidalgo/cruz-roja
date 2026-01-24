@@ -67,7 +67,7 @@ export function FreeServicesSection() {
               }`}
           >
             <div className="bg-surgical text-vital px-8 py-3 rounded-full border-4 border-surgical shadow-brutal transform -rotate-2">
-              <span className="font-inter text-sm uppercase tracking-wider font-bold">MITO DESTRUIDO</span>
+              <span className="font-inter text-base uppercase tracking-[0.1em] font-bold">MITO DESTRUIDO</span>
             </div>
           </div>
 
@@ -102,8 +102,8 @@ export function FreeServicesSection() {
             >
               <div className="text-5xl mb-4">{service.icon}</div>
               <h3 className="font-clash text-2xl font-bold text-foreground mb-2">{service.title}</h3>
-              <p className="font-inter text-sm text-black mb-4 leading-relaxed">{service.description}</p>
-              <div className="inline-block bg-vital text-surgical px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider">
+              <p className="font-inter text-base text-black mb-4 leading-relaxed tracking-normal">{service.description}</p>
+              <div className="inline-block bg-vital text-surgical px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-[0.08em]">
                 {service.detail}
               </div>
             </div>

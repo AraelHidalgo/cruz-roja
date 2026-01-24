@@ -86,19 +86,19 @@ export function SemillaSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="bg-depth-1 text-surgical rounded-[24px] p-6 shadow-brutal border-4 border-foreground text-center">
             <div className="font-clash text-4xl font-bold mb-1">300K+</div>
-            <p className="font-inter text-xs uppercase tracking-wider">Capacitados</p>
+            <p className="font-inter text-sm uppercase tracking-[0.1em]">Capacitados</p>
           </div>
           <div className="bg-depth-1 text-surgical rounded-[24px] p-6 shadow-brutal border-4 border-foreground text-center">
             <div className="font-clash text-4xl font-bold mb-1">1,200</div>
-            <p className="font-inter text-xs uppercase tracking-wider">Cursos/año</p>
+            <p className="font-inter text-sm uppercase tracking-[0.1em]">Cursos/año</p>
           </div>
           <div className="bg-depth-1 text-surgical rounded-[24px] p-6 shadow-brutal border-4 border-foreground text-center">
             <div className="font-clash text-4xl font-bold mb-1">32</div>
-            <p className="font-inter text-xs uppercase tracking-wider">Estados</p>
+            <p className="font-inter text-sm uppercase tracking-[0.1em]">Estados</p>
           </div>
           <div className="bg-depth-1 text-surgical rounded-[24px] p-6 shadow-brutal border-4 border-foreground text-center">
             <div className="font-clash text-4xl font-bold mb-1">85%</div>
-            <p className="font-inter text-xs uppercase tracking-wider">Certificación</p>
+            <p className="font-inter text-sm uppercase tracking-[0.1em]">Certificación</p>
           </div>
         </div>
       </div>

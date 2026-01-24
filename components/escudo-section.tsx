@@ -93,7 +93,7 @@ export function EscudoSection() {
                       {/* Overlay text */}
                       <div className="absolute inset-0 bg-gradient-to-t from-depth-1 via-depth-1/50 to-transparent flex items-end p-8 md:p-12">
                         <div>
-                          <p className="font-inter text-sm uppercase tracking-wider opacity-75 mb-2">
+                          <p className="font-inter text-base uppercase tracking-[0.1em] opacity-75 mb-2">
                             RESPUESTA ANTE EMERGENCIAS
                           </p>
                           <p className="font-clash text-3xl md:text-5xl font-bold leading-tight max-w-3xl">
@@ -122,19 +122,19 @@ export function EscudoSection() {
         >
           <div className="bg-vital text-surgical rounded-[32px] p-8 shadow-brutal border-4 border-surgical">
             <div className="font-clash text-5xl md:text-6xl font-bold mb-2">1985</div>
-            <p className="font-inter text-sm leading-relaxed">
+            <p className="font-inter text-base leading-relaxed tracking-normal">
               Desde el sismo de 1985, siempre presentes en cada desastre nacional
             </p>
           </div>
 
           <div className="bg-vital text-surgical rounded-[32px] p-8 shadow-brutal border-4 border-surgical">
             <div className="font-clash text-5xl md:text-6xl font-bold mb-2">72h</div>
-            <p className="font-inter text-sm leading-relaxed">Movilización completa en las primeras horas críticas</p>
+            <p className="font-inter text-base leading-relaxed tracking-normal">Movilización completa en las primeras horas críticas</p>
           </div>
 
           <div className="bg-vital text-surgical rounded-[32px] p-8 shadow-brutal border-4 border-surgical">
             <div className="font-clash text-5xl md:text-6xl font-bold mb-2">100K+</div>
-            <p className="font-inter text-sm leading-relaxed">
+            <p className="font-inter text-base leading-relaxed tracking-normal">
               Personas rescatadas y atendidas en situaciones de emergencia
             </p>
           </div>
@@ -146,25 +146,25 @@ export function EscudoSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="border-l-4 border-vital pl-6">
               <p className="font-inter font-semibold text-lg mb-1">Sismos 1985 y 2017</p>
-              <p className="font-inter text-sm text-black leading-relaxed">
+              <p className="font-inter text-base text-black leading-relaxed tracking-normal">
                 Miles de vidas salvadas en las horas más oscuras de México
               </p>
             </div>
             <div className="border-l-4 border-vital pl-6">
               <p className="font-inter font-semibold text-lg mb-1">Huracanes Otis & Ingrid</p>
-              <p className="font-inter text-sm text-black leading-relaxed">
+              <p className="font-inter text-base text-black leading-relaxed tracking-normal">
                 Respuesta inmediata en zonas costeras devastadas
               </p>
             </div>
             <div className="border-l-4 border-vital pl-6">
               <p className="font-inter font-semibold text-lg mb-1">Explosión de Tlahuelilpan</p>
-              <p className="font-inter text-sm text-black leading-relaxed">
+              <p className="font-inter text-base text-black leading-relaxed tracking-normal">
                 Atención médica y apoyo psicológico a comunidades afectadas
               </p>
             </div>
             <div className="border-l-4 border-vital pl-6">
               <p className="font-inter font-semibold text-lg mb-1">COVID-19</p>
-              <p className="font-inter text-sm text-black leading-relaxed">
+              <p className="font-inter text-base text-black leading-relaxed tracking-normal">
                 Traslado de pacientes y distribución de oxígeno en todo el país
               </p>
             </div>

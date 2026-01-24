@@ -60,7 +60,7 @@ export default function BancoDeSangrePage() {
                                 <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-12 py-8 rounded-full shadow-[0_0_50px_rgba(220,38,38,0.5)] transition-transform hover:scale-105">
                                     REQUISITOS DE DONACIÓN
                                 </Button>
-                                <Button size="lg" variant="outline" className="border-red-900/50 text-black hover:bg-red-900/20 text-xl px-12 py-8 rounded-full">
+                                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 hover:text-white text-xl px-12 py-8 rounded-full">
                                     COSTOS DE RECUPERACIÓN
                                 </Button>
                             </div>

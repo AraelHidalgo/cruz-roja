@@ -46,7 +46,7 @@ export function RequirementsViewer() {
                             </div>
 
                             <div className="text-4xl mb-6">{req.icon}</div>
-                            <p className="font-inter text-gray-200 text-xl font-medium leading-relaxed">
+                            <p className="font-inter text-gray-200 text-lg md:text-xl font-medium leading-relaxed tracking-normal">
                                 {req.text}
                             </p>
                         </motion.div>
@@ -55,7 +55,7 @@ export function RequirementsViewer() {
 
                 <div className="mt-12 p-6 rounded-2xl bg-red-900/10 border border-red-500/20 max-w-3xl mx-auto text-center">
                     <h3 className="text-white font-bold mb-2">⚠ IMPORTANTE</h3>
-                    <p className="text-sm text-red-200 text-opacity-80">
+                    <p className="text-base text-red-200 text-opacity-80 tracking-normal leading-relaxed">
                         La evaluación final se realiza MEDIANTE ENTREVISTA MÉDICA PRIVADA.
                         Sé honesto; la seguridad de quien recibe la sangre depende de ti.
                     </p>

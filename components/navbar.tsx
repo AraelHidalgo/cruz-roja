@@ -104,7 +104,7 @@ export function Navbar() {
               href="https://www.cruzrojamexicana.org.mx/donativos"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:block px-6 py-3 bg-red text-red font-clash font-bold text-sm border-4 border-black shadow-brutal hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+              className="hidden lg:block px-6 py-3 bg-vital text-white font-clash font-bold text-sm border-4 border-black shadow-brutal hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
             >
               DONAR AHORA
             </a>
@@ -133,8 +133,8 @@ export function Navbar() {
                   href={section.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`px-4 py-3 font-inter font-medium text-left border-l-4 transition-all ${activeSection === section.id
-                      ? "border-red-600 bg-red-50 text-red-600"
-                      : "border-transparent hover:border-red-600 hover:bg-red-50 text-black"
+                    ? "border-red-600 bg-red-50 text-red-600"
+                    : "border-transparent hover:border-red-600 hover:bg-red-50 text-black"
                     }`}
                 >
                   {section.label}

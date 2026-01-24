@@ -47,7 +47,7 @@ export function ServicesGrid() {
                                 <div className={`w-4 h-16 rounded-full ${item.color}`} />
                                 <div>
                                     <h4 className="text-white font-bold text-2xl mb-2">{item.title}</h4>
-                                    <p className="text-lg text-gray-300 leading-normal">{item.desc}</p>
+                                    <p className="text-lg text-gray-300 leading-relaxed tracking-normal">{item.desc}</p>
                                 </div>
                             </motion.div>
                         ))}

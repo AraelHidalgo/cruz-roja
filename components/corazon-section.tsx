@@ -69,10 +69,10 @@ export function CorazonSection() {
             <h2 className="font-clash text-5xl md:text-8xl font-bold text-white mb-2 tracking-tighter">EL CORAZÓN</h2>
             <div className="h-2 w-full bg-vital rounded-full origin-left transform scale-x-50" />
           </motion.div>
-          <motion.p variants={itemVariants} className="font-mono text-xl md:text-2xl text-red-500 mt-6 tracking-widest uppercase">
+          <motion.p variants={itemVariants} className="font-mono text-lg md:text-xl text-red-500 mt-6 tracking-[0.15em] uppercase">
             Atención Prehospitalaria
           </motion.p>
-          <motion.p variants={itemVariants} className="font-inter text-lg text-gray-400 mt-4 max-w-xl leading-relaxed">
+          <motion.p variants={itemVariants} className="font-inter text-lg md:text-xl text-gray-400 mt-4 max-w-xl leading-relaxed tracking-normal">
             Cuando cada segundo cuenta, somos la diferencia entre el caos y la esperanza.
           </motion.p>
         </div>
@@ -100,7 +100,7 @@ export function CorazonSection() {
               <div className="font-clash text-[6rem] md:text-[10rem] font-bold leading-none text-white tracking-tighter tabular-nums text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50">
                 <Counter value={servicesCount} />
               </div>
-              <div className="mt-4 font-inter text-gray-400 text-sm md:text-base border-t border-white/10 pt-4 flex justify-between items-center">
+              <div className="mt-4 font-inter text-gray-400 text-base md:text-lg border-t border-white/10 pt-4 flex justify-between items-center tracking-wide">
                 <span>ACTUALIZACIÓN EN TIEMPO REAL</span>
                 <span className="text-red-500 font-bold">LIVE</span>
               </div>
@@ -113,10 +113,10 @@ export function CorazonSection() {
             className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 flex flex-col justify-between min-h-[200px]"
           >
             <div className="absolute inset-0 bg-red-600/10 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2 origin-top-left" />
-            <span className="font-mono text-xs text-gray-500 uppercase tracking-widest">Disponibilidad</span>
+            <span className="font-mono text-sm text-gray-500 uppercase tracking-[0.15em]">Disponibilidad</span>
             <div>
               <div className="font-clash text-5xl font-bold text-white mb-2">24/7</div>
-              <p className="font-inter text-sm text-gray-400">Siempre listos. Siempre ahí.</p>
+              <p className="font-inter text-base text-gray-400 tracking-normal">Siempre listos. Siempre ahí.</p>
             </div>
           </motion.div>
 
@@ -126,10 +126,10 @@ export function CorazonSection() {
             className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 flex flex-col justify-between min-h-[200px]"
           >
             <div className="absolute inset-0 bg-blue-600/10 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full blur-2xl translate-x-1/2 translate-y-1/2 origin-bottom-right" />
-            <span className="font-mono text-xs text-gray-500 uppercase tracking-widest">Tiempo Promedio</span>
+            <span className="font-mono text-sm text-gray-500 uppercase tracking-[0.15em]">Tiempo Promedio</span>
             <div>
               <div className="font-clash text-5xl font-bold text-white mb-2">5min</div>
-              <p className="font-inter text-sm text-gray-400">Respuesta inmediata</p>
+              <p className="font-inter text-base text-gray-400 tracking-normal">Respuesta inmediata</p>
             </div>
           </motion.div>
 
@@ -141,15 +141,15 @@ export function CorazonSection() {
             <div className="grid md:grid-cols-3 gap-12 relative z-10">
               <div>
                 <div className="font-clash text-5xl font-bold text-white mb-2">500+</div>
-                <p className="font-mono text-xs text-red-500 uppercase tracking-wider">Ambulancias</p>
+                <p className="font-mono text-sm text-red-500 uppercase tracking-[0.1em]">Ambulancias</p>
               </div>
               <div>
                 <div className="font-clash text-5xl font-bold text-white mb-2">32</div>
-                <p className="font-mono text-xs text-red-500 uppercase tracking-wider">Estados</p>
+                <p className="font-mono text-sm text-red-500 uppercase tracking-[0.1em]">Estados</p>
               </div>
               <div>
                 <div className="font-clash text-5xl font-bold text-white mb-2">100%</div>
-                <p className="font-mono text-xs text-red-500 uppercase tracking-wider">Gratuito</p>
+                <p className="font-mono text-sm text-red-500 uppercase tracking-[0.1em]">Gratuito</p>
               </div>
             </div>
           </motion.div>

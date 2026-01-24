@@ -40,27 +40,27 @@ export function RedSection() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           <div className="bg-background rounded-[32px] p-8 md:p-12 shadow-brutal border-4 border-foreground hover:translate-x-1 hover:translate-y-1 transition-transform">
-            <span className="font-inter text-sm uppercase tracking-wider text-muted-foreground font-semibold block mb-4">
+            <span className="font-inter text-base uppercase tracking-[0.1em] text-muted-foreground font-semibold block mb-4">
               ACCESO A SALUD
             </span>
             <div className="font-clash text-6xl md:text-7xl font-bold text-vital mb-4">2M+</div>
-            <p className="font-inter text-base text-muted-foreground leading-relaxed">
+            <p className="font-inter text-lg text-muted-foreground leading-relaxed tracking-normal">
               Consultas médicas anuales para personas en situación vulnerable
             </p>
           </div>
 
           <div className="bg-background rounded-[32px] p-8 md:p-12 shadow-brutal border-4 border-foreground hover:translate-x-1 hover:translate-y-1 transition-transform">
-            <span className="font-inter text-sm uppercase tracking-wider text-muted-foreground font-semibold block mb-4">
+            <span className="font-inter text-base uppercase tracking-[0.1em] text-muted-foreground font-semibold block mb-4">
               DIGNIDAD HUMANA
             </span>
             <div className="font-clash text-6xl md:text-7xl font-bold text-vital mb-4">$0</div>
-            <p className="font-inter text-base text-muted-foreground leading-relaxed">
+            <p className="font-inter text-lg text-muted-foreground leading-relaxed tracking-normal">
               Costo para quienes no pueden pagar. La salud no es un privilegio.
             </p>
           </div>
         </div>
 
-        {/* Liquid Glass Testimonials */}
+        {/* Testimonials */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
             <div
@@ -74,26 +74,23 @@ export function RedSection() {
             >
               {/* Glass refraction effect */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br from-vital/10 to-transparent transition-opacity duration-500 ${
-                  hoveredIndex === index ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute inset-0 bg-gradient-to-br from-vital/10 to-transparent transition-opacity duration-500 ${hoveredIndex === index ? "opacity-100" : "opacity-0"
+                  }`}
               />
 
               <div className="relative z-10">
                 <p
-                  className={`font-inter text-base leading-relaxed mb-6 transition-all duration-500 ${
-                    hoveredIndex === index ? "blur-none opacity-100" : "blur-sm opacity-60"
-                  }`}
+                  className={`font-inter text-lg leading-relaxed mb-6 transition-all duration-500 ${hoveredIndex === index ? "opacity-100" : "opacity-80"
+                    }`}
                 >
                   "{testimonial.quote}"
                 </p>
                 <div
-                  className={`transition-all duration-500 ${
-                    hoveredIndex === index ? "blur-none opacity-100" : "blur-sm opacity-60"
-                  }`}
+                  className={`transition-all duration-500 ${hoveredIndex === index ? "opacity-100" : "opacity-80"
+                    }`}
                 >
                   <p className="font-inter font-semibold text-foreground">{testimonial.author}</p>
-                  <p className="font-inter text-sm text-muted-foreground">{testimonial.location}</p>
+                  <p className="font-inter text-base text-muted-foreground tracking-normal">{testimonial.location}</p>
                 </div>
               </div>
             </div>
