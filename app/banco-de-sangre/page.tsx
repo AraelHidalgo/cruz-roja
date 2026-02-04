@@ -7,6 +7,7 @@ import { ArrowRight, Droplet, Heart, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { RequirementsViewer } from "@/components/blood-bank/requirements-viewer"
 import { ServicesGrid } from "@/components/blood-bank/services-grid"
+import { TransfusionServices } from "@/components/blood-bank/transfusion-services"
 
 export default function BancoDeSangrePage() {
     const { scrollY } = useScroll()
@@ -71,6 +72,7 @@ export default function BancoDeSangrePage() {
                 <section className="min-h-screen relative z-10">
                     <RequirementsViewer />
                     <ServicesGrid />
+                    <TransfusionServices />
 
                     {/* Final CTA */}
                     <div className="py-24 text-center bg-gradient-to-b from-red-600 from-85% via-red-400 via-150%">
