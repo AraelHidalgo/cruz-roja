@@ -42,7 +42,7 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 overflow-hidden pt-28 sm:pt-32 pb-12">
+    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 overflow-hidden pt-28 sm:pt-20 md:pt-0 pb-12">
       {/* Gradiente visible */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-rose-100 via-90% to-red-300" />
 
@@ -192,7 +192,7 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden sm:flex"
       >
-        <span className="text-[10px] uppercase tracking-widest text-black">Scroll</span>
+
         <div className="w-px h-8 sm:h-12 bg-gradient-to-b from-vital/50 to-transparent" />
       </motion.div>
 

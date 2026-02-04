@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence, useScroll } from "framer-motion"
 import { Phone, X, AlertTriangle, ShieldAlert } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -12,6 +12,33 @@ const EMERGENCY_PHONES = [
 
 export function PanicButton() {
     const [isOpen, setIsOpen] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false)
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [showTooltip, setShowTooltip] = useState(false)
+    const { scrollY } = useScroll()
+
+    useEffect(() => {
+        return scrollY.on("change", (latest) => {
+            const scrolled = latest > 100
+            setIsScrolled(scrolled)
+            
+            // Mostrar tooltip cuando se contrae por primera vez
+            if (scrolled && !showTooltip) {
+                setShowTooltip(true)
+                // Ocultarlo después de 5 segundos
+                setTimeout(() => setShowTooltip(false), 5000)
+            }
+        })
+    }, [scrollY, showTooltip])
+
+    // Escuchar cambios del menú móvil
+    useEffect(() => {
+        const handleMenuToggle = (e: CustomEvent) => {
+            setIsMobileMenuOpen(e.detail)
+        }
+        window.addEventListener('mobileMenuToggle' as any, handleMenuToggle)
+        return () => window.removeEventListener('mobileMenuToggle' as any, handleMenuToggle)
+    }, [])
 
     const handleCall = (phone: string) => {
         window.location.href = `tel:${phone.replace(/-/g, "")}`
@@ -19,46 +46,97 @@ export function PanicButton() {
 
     return (
         <>
-            {/* Barra de emergencia fija - RESPONSIVE */}
-            <motion.div
-                initial={{ y: -120 }}
-                animate={{ y: 0 }}
-                transition={{ delay: 1, duration: 0.5, ease: "easeOut" }}
-                className="fixed top-24 sm:top-20 left-0 right-0 z-40 px-2 sm:px-4"
-            >
-                <div className="max-w-4xl mx-auto">
-                    <button
-                        onClick={() => setIsOpen(true)}
-                        className="w-full bg-gradient-to-r from-vital via-red-600 to-vital text-white py-3 sm:py-4 px-3 sm:px-6 rounded-xl sm:rounded-2xl shadow-[0_4px_20px_rgba(220,38,38,0.4)] hover:shadow-[0_8px_30px_rgba(220,38,38,0.6)] transition-all flex items-center justify-center gap-2 sm:gap-3 group cursor-pointer min-h-[56px]"
-                        aria-label="Abrir panel de emergencia"
-                    >
-                        <motion.div
-                            animate={{ scale: [1, 1.2, 1] }}
-                            transition={{ duration: 1, repeat: Infinity }}
-                            className="w-10 h-10 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0"
-                        >
-                            <Phone className="w-5 h-5 sm:w-5 sm:h-5" />
-                        </motion.div>
-                        <div className="text-left flex-1 min-w-0">
-                            <div className="font-bold text-sm sm:text-base md:text-lg leading-tight truncate">
-                                ¿EMERGENCIA? LLÁMANOS
-                            </div>
-                            <div className="text-xs sm:text-sm text-white/90 font-mono truncate">
-                                962-606-4212 | 962-626-1949
-                            </div>
-                        </div>
-                        <motion.span
-                            animate={{ x: [0, 5, 0] }}
-                            transition={{ duration: 1, repeat: Infinity }}
-                            className="text-xl sm:text-2xl flex-shrink-0 hidden sm:block"
-                        >
-                            →
-                        </motion.span>
-                    </button>
-                </div>
-            </motion.div>
+            {/* Barra de emergencia fija - SE OCULTA INSTANTÁNEAMENTE cuando menu móvil está abierto */}
+            {!isMobileMenuOpen && (
+                <motion.div
+                    initial={{ y: -120 }}
+                    animate={{ y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
+                    className={`fixed z-40 transition-all duration-700 ease-in-out ${
+                        isScrolled 
+                            ? "top-24 sm:top-24 left-2 sm:left-4" 
+                            : "top-24 sm:top-24 left-0 right-0 sm:left-4 sm:right-auto px-2 sm:px-0"
+                    }`}
+                >
+                    <div className={`transition-all duration-700 ease-in-out ${
+                        isScrolled ? "relative" : "max-w-4xl sm:max-w-sm mx-auto sm:mx-0"
+                    }`}>
+                        {/* Tooltip cuando está contraído */}
+                        <AnimatePresence>
+                            {isScrolled && showTooltip && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: -10, scale: 0.9 }}
+                                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                                    exit={{ opacity: 0, x: -10, scale: 0.9 }}
+                                    className="absolute left-full ml-3 top-1/2 -translate-y-1/2 whitespace-nowrap hidden sm:block pointer-events-none"
+                                >
+                                    <div className="bg-white rounded-2xl shadow-xl p-3 pr-4">
+                                        <div className="flex items-center gap-2">
+                                            <Phone className="w-4 h-4 text-vital" />
+                                            <span className="text-sm font-medium text-black">¡Emergencias!</span>
+                                        </div>
+                                        <p className="text-xs text-black/60 mt-1">Click para llamar</p>
+                                    </div>
+                                    {/* Flecha del tooltip */}
+                                    <div className="absolute top-1/2 -translate-y-1/2 -left-2 w-4 h-4 bg-white border-l border-b border-red-100 rotate-45" />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
 
-            {/* Modal de emergencia - RESPONSIVE */}
+                        <button
+                            onClick={() => setIsOpen(true)}
+                            onMouseEnter={() => isScrolled && setShowTooltip(true)}
+                            onMouseLeave={() => setShowTooltip(false)}
+                            className={`bg-gradient-to-r from-vital via-red-600 to-vital text-white shadow-[0_4px_20px_rgba(220,38,38,0.4)] hover:shadow-[0_8px_30px_rgba(220,38,38,0.6)] transition-all duration-700 ease-in-out flex items-center justify-center gap-2 sm:gap-3 group cursor-pointer ${
+                                isScrolled
+                                    ? "w-14 h-14 rounded-full p-0"
+                                    : "w-full sm:w-auto py-3 sm:py-4 px-3 sm:px-6 rounded-xl sm:rounded-2xl min-h-[56px]"
+                            }`}
+                            aria-label="Abrir panel de emergencia"
+                        >
+                            {/* Icono del teléfono - siempre visible */}
+                            <motion.div
+                                animate={{ scale: [1, 1.2, 1] }}
+                                transition={{ duration: 1, repeat: Infinity }}
+                                className={`bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 ${
+                                    isScrolled ? "w-8 h-8" : "w-10 h-10 sm:w-8 sm:h-8"
+                                }`}
+                            >
+                                <Phone className="w-5 h-5" />
+                            </motion.div>
+
+                            {/* Texto - se oculta al hacer scroll */}
+                            {!isScrolled && (
+                                <motion.div
+                                    initial={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="text-left flex-1 min-w-0"
+                                >
+                                    <div className="font-bold text-sm sm:text-base md:text-lg leading-tight truncate">
+                                        ¿EMERGENCIA? LLÁMANOS
+                                    </div>
+                                    <div className="text-xs sm:text-sm text-white/90 font-mono truncate">
+                                        962-606-4212 | 962-626-1949
+                                    </div>
+                                </motion.div>
+                            )}
+
+                            {/* Flecha - se oculta al hacer scroll */}
+                            {!isScrolled && (
+                                <motion.span
+                                    animate={{ x: [0, 5, 0] }}
+                                    transition={{ duration: 1, repeat: Infinity }}
+                                    className="text-xl sm:text-2xl flex-shrink-0 hidden sm:block"
+                                >
+                                    →
+                                </motion.span>
+                            )}
+                        </button>
+                    </div>
+                </motion.div>
+            )}
+
+            {/* Modal de emergencia */}
             <AnimatePresence>
                 {isOpen && (
                     <>

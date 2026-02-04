@@ -298,14 +298,14 @@ export function EmergencyBot() {
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder="Escribe tu pregunta..."
-                                className="flex-1 px-4 py-2 bg-gray-100 rounded-full text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-vital/30 min-h-[44px]"
+                                className="flex-1 px-4 py-2 bg-gray-100 rounded-full text-sm sm:text-base text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-vital/30 min-h-[44px]"
                             />
                             <Button
                                 type="submit"
                                 size="icon"
                                 className="bg-vital hover:bg-vital/90 rounded-full w-11 h-11 sm:w-10 sm:h-10 cursor-pointer flex-shrink-0"
                             >
-                                <Send className="w-4 h-4" />
+                                <Send className="w-4 h-4 text-white" />
                             </Button>
                         </form>
 

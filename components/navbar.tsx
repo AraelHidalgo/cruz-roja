@@ -49,6 +49,14 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [lastScrollY])
 
+  // Exponer el estado del menú móvil globalmente
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      (window as any).__mobileMenuOpen = isMobileMenuOpen
+      window.dispatchEvent(new CustomEvent('mobileMenuToggle', { detail: isMobileMenuOpen }))
+    }
+  }, [isMobileMenuOpen])
+
   return (
     <>
       <nav
@@ -70,6 +78,14 @@ export function Navbar() {
                 height={128}
                 className="transition-transform group-hover:scale-105"
               />
+              <div className="hidden md:flex flex-col">
+                <span className="font-inter text-xl font-bold text-black leading-tight">
+                  Delegación
+                </span>
+                <span className="font-inter text-xl font-bold text-vital leading-tight">
+                  Tapachula
+                </span>
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
@@ -94,7 +110,7 @@ export function Navbar() {
               href="https://www.cruzrojamexicana.org.mx/donativos"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:block px-6 py-3 bg-gradient-to-r from-red-600 to-red-500 text-white font-clash font-bold text-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+              className="hidden lg:block px-6 py-3 bg-white text-red-600 font-clash font-bold text-sm rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
             >
               DONAR AHORA
             </a>
