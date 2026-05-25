@@ -86,7 +86,7 @@ export function EscudoSection() {
                   <div className="relative rounded-[32px] overflow-hidden shadow-brutal border-4 border-red-300">
                     <div className="aspect-[16/9] bg-gray-100 relative">
                       <img
-                        src={`/carousel/${num}.png`}
+                        src={`/carousel/${num}.jpeg`}
                         alt={`Cruz Roja en acción ${num}`}
                         className="w-full h-full object-cover"
                         style={{
