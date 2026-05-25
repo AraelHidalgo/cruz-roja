@@ -195,20 +195,20 @@ export function PanicButton() {
                                 </div>
 
                                 {/* ADVERTENCIA SOBRE LLAMADAS FALSAS */}
-                                <div className="bg-amber-50 border-t-2 border-amber-300 p-3 sm:p-4">
+                                <div className="bg-black border-t-2 border-amber-300 p-3 sm:p-4">
                                     <div className="flex items-start gap-2 sm:gap-3">
                                         <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
                                             <ShieldAlert className="w-5 h-5 text-white" />
                                         </div>
                                         <div className="min-w-0">
-                                            <h3 className="font-bold text-amber-800 text-xs sm:text-sm mb-1">
+                                            <h3 className="font-bold text-white text-s sm:text-sm mb-1">
                                                 ⚠️ SOLO EMERGENCIAS REALES
                                             </h3>
-                                            <p className="text-xs text-amber-700 leading-relaxed">
+                                            <p className="text-s text-red-500 leading-relaxed">
                                                 Las <strong>llamadas falsas son un delito</strong> y pueden retrasar la atención a personas que realmente la necesitan.
                                             </p>
-                                            <p className="text-xs text-amber-800 font-semibold mt-1 sm:mt-2">
-                                                📋 Las llamadas falsas serán reportadas.
+                                            <p className="text-s text-amber-300 font-semibold mt-1 sm:mt-2">
+                                                📋 Llamadas falsas son monitorizadas y reportadas.
                                             </p>
                                         </div>
                                     </div>
