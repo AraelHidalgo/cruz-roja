@@ -12,74 +12,9 @@ interface Message {
     timestamp: Date
 }
 
-// Base de conocimiento del bot
-const KNOWLEDGE_BASE: Record<string, string> = {
-    infarto: `🚨 **Ante un posible infarto:**
-1. Llama inmediatamente al 962-606-4212
-2. Sienta a la persona en posición cómoda
-3. Afloja ropa ajustada
-4. Si tiene aspirina y no es alérgico, que mastique una
-5. No la dejes sola, mantén la calma
-6. Prepárate para dar RCP si deja de respirar`,
-
-    quemadura: `🔥 **Ante una quemadura:**
-1. Enfría con agua fría por 10-20 minutos
-2. NO uses hielo directamente
-3. NO apliques pasta de dientes ni mantequilla
-4. Cubre con gasa limpia y seca
-5. Si es grave, llámanos: 962-606-4212`,
-
-    hemorragia: `🩸 **Ante una hemorragia:**
-1. Presiona firmemente con tela limpia
-2. Eleva la extremidad si es posible
-3. Mantén la presión sin soltar
-4. Si empapa, pon otra tela encima
-5. Llama al 962-606-4212 si no cede`,
-
-    ahogamiento: `💨 **Si alguien se está ahogando:**
-1. Pregunta "¿Puedes hablar?"
-2. Si NO puede: Maniobra de Heimlich
-3. Abraza por detrás, puño en abdomen
-4. Comprime hacia arriba y adentro
-5. Repite hasta que expulse el objeto`,
-
-    fractura: `🦴 **Ante una posible fractura:**
-1. NO muevas a la persona
-2. Inmoviliza la zona afectada
-3. Aplica hielo envuelto en tela
-4. Llama al 962-606-4212
-5. Mantén a la persona calmada`,
-
-    convulsion: `⚡ **Ante una convulsión:**
-1. Despeja el área de objetos
-2. NO introduzcas nada en la boca
-3. Coloca algo suave bajo la cabeza
-4. Ponlo de lado cuando termine
-5. Llama al 962-606-4212`,
-
-    horario: `⏰ **Horario de Atención:**
-Emergencias: 24/7, los 365 días del año
-Oficinas: Lunes a Viernes 8:00 - 18:00
-Banco de Sangre: Lunes a Sábado 7:00 - 15:00`,
-
-    ubicacion: `📍 **Ubicación:**
-Cruz Roja Tapachula
-Chiapas, México`,
-
-    servicios: `🏥 **Nuestros Servicios:**
-• 🚑 Ambulancias 24/7
-• 🩸 Banco de Sangre
-• 📚 Capacitación en primeros auxilios
-• 🏥 Atención prehospitalaria
-• 🤝 Asistencia en desastres`,
-
-    donar: `❤️ **¿Quieres donar?**
-Puedes donar sangre, tiempo como voluntario, o hacer donaciones económicas.`,
-
-    telefono: `📞 **Teléfonos de Emergencia:**
-• Línea Principal: 962-606-4212
-• Línea Alternativa: 962-626-1949
-Disponibles 24/7`,
+interface BotApiResponse {
+    reply?: string
+    error?: string
 }
 
 const QUICK_REPLIES = [
@@ -89,41 +24,33 @@ const QUICK_REPLIES = [
     "Teléfonos",
 ]
 
-function findResponse(input: string): string {
-    const normalizedInput = input.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+async function requestBotResponse(messages: Message[]) {
+    const response = await fetch("/api/emergency-bot", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            messages: messages.map((message) => ({
+                role: message.isBot ? "model" : "user",
+                text: message.text,
+            })),
+        }),
+    })
 
-    const keywords: Record<string, string[]> = {
-        infarto: ["infarto", "corazon", "pecho", "cardio", "ataque"],
-        quemadura: ["quemadura", "quemado", "fuego", "caliente"],
-        hemorragia: ["sangrado", "hemorragia", "sangre", "corte", "herida"],
-        ahogamiento: ["ahoga", "atraganta", "trago", "comida atorada"],
-        fractura: ["fractura", "hueso", "roto", "quebrado"],
-        convulsion: ["convulsion", "epilepsia", "ataque", "temblor"],
-        horario: ["horario", "hora", "cuando", "abierto"],
-        ubicacion: ["donde", "ubicacion", "direccion", "llegar", "mapa"],
-        servicios: ["servicio", "ofrece", "hacen", "ayuda"],
-        donar: ["donar", "donacion", "ayudar", "voluntario"],
-        telefono: ["telefono", "numero", "llamar", "contacto", "emergencia"],
+    const data = (await response.json()) as BotApiResponse
+
+    if (!response.ok) {
+        throw new Error(data.error ?? "No se pudo contactar al asistente.")
     }
 
-    for (const [key, words] of Object.entries(keywords)) {
-        if (words.some((word) => normalizedInput.includes(word))) {
-            return KNOWLEDGE_BASE[key]
-        }
-    }
-
-    return `No tengo información específica sobre eso, pero puedo ayudarte con:
-• Primeros auxilios
-• Horarios y ubicación
-• Servicios disponibles
-• Números de emergencia
-
-¿Sobre qué te gustaría saber más?`
+    return data.reply ?? "No pude generar una respuesta. Si es una emergencia real, llama al 911 o al 962-606-4212."
 }
 
 export function EmergencyBot() {
     const [isOpen, setIsOpen] = useState(false)
     const [showTooltip, setShowTooltip] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 1,
@@ -154,8 +81,8 @@ export function EmergencyBot() {
         return () => clearTimeout(timer)
     }, [])
 
-    const sendMessage = (text: string) => {
-        if (!text.trim()) return
+    const sendMessage = async (text: string) => {
+        if (!text.trim() || isLoading) return
 
         const userMessage: Message = {
             id: Date.now(),
@@ -164,18 +91,32 @@ export function EmergencyBot() {
             timestamp: new Date(),
         }
 
-        setMessages((prev) => [...prev, userMessage])
+        const nextMessages = [...messages, userMessage]
+        setMessages(nextMessages)
         setInput("")
+        setIsLoading(true)
 
-        setTimeout(() => {
+        try {
+            const reply = await requestBotResponse(nextMessages)
             const botResponse: Message = {
                 id: Date.now() + 1,
-                text: findResponse(text),
+                text: reply,
                 isBot: true,
                 timestamp: new Date(),
             }
             setMessages((prev) => [...prev, botResponse])
-        }, 500)
+        } catch (error) {
+            console.error(error)
+            const errorMessage: Message = {
+                id: Date.now() + 1,
+                text: "No pude conectar con el asistente en este momento. Si es una emergencia real, llama al 911 o a Cruz Roja Tapachula: 962-606-4212.",
+                isBot: true,
+                timestamp: new Date(),
+            }
+            setMessages((prev) => [...prev, errorMessage])
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -274,6 +215,16 @@ export function EmergencyBot() {
                                     </div>
                                 </div>
                             ))}
+                            {isLoading && (
+                                <div className="flex justify-start">
+                                    <div className="max-w-[85%] p-3 rounded-2xl text-sm bg-white border border-black/5 text-black">
+                                        <div className="flex items-center gap-2 text-black/60">
+                                            <span className="w-2 h-2 bg-vital rounded-full animate-pulse" />
+                                            Pensando...
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                             <div ref={messagesEndRef} />
                         </div>
 
@@ -283,7 +234,8 @@ export function EmergencyBot() {
                                 <button
                                     key={reply}
                                     onClick={() => sendMessage(reply)}
-                                    className="flex-shrink-0 px-3 py-2 bg-rose-50 text-vital text-xs font-medium rounded-full hover:bg-rose-100 transition-colors cursor-pointer min-h-[36px]"
+                                    disabled={isLoading}
+                                    className="flex-shrink-0 px-3 py-2 bg-rose-50 text-vital text-xs font-medium rounded-full hover:bg-rose-100 transition-colors cursor-pointer min-h-[36px] disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {reply}
                                 </button>
@@ -298,12 +250,14 @@ export function EmergencyBot() {
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder="Escribe tu pregunta..."
+                                disabled={isLoading}
                                 className="flex-1 px-4 py-2 bg-gray-100 rounded-full text-sm sm:text-base text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-vital/30 min-h-[44px]"
                             />
                             <Button
                                 type="submit"
                                 size="icon"
-                                className="bg-vital hover:bg-vital/90 rounded-full w-11 h-11 sm:w-10 sm:h-10 cursor-pointer flex-shrink-0"
+                                disabled={isLoading}
+                                className="bg-vital hover:bg-vital/90 rounded-full w-11 h-11 sm:w-10 sm:h-10 cursor-pointer flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <Send className="w-4 h-4 text-white" />
                             </Button>
