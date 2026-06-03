@@ -1,25 +1,33 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion, useInView, useSpring, useMotionValue } from "framer-motion"
+import { motion, useInView, animate } from "framer-motion"
 
 // Number counter component
 function Counter({ value }: { value: number }) {
   const ref = useRef<HTMLSpanElement>(null)
-  const motionValue = useMotionValue(0)
-  const springValue = useSpring(motionValue, { damping: 50, stiffness: 300 })
+  const prevValueRef = useRef(0)
 
   useEffect(() => {
-    motionValue.set(value)
-  }, [value, motionValue])
+    const node = ref.current
+    if (!node) return
 
-  useEffect(() => {
-    return springValue.on("change", (latest) => {
-      if (ref.current) {
-        ref.current.textContent = Math.floor(latest).toString().padStart(4, "0")
-      }
+    const from = prevValueRef.current
+    // Si es el primer render (de 0 al número total), dura 4.5 segundos para que sea un ascenso suave y pausado.
+    // Para actualizaciones posteriores (de 20-30s), el pequeño incremento de 1-2 números dura 2 segundos para que sea muy sutil.
+    const duration = from === 0 ? 4.5 : 2
+
+    const controls = animate(from, value, {
+      duration: duration,
+      ease: "easeOut",
+      onUpdate(latest) {
+        node.textContent = Math.floor(latest).toString().padStart(4, "0")
+      },
     })
-  }, [springValue])
+
+    prevValueRef.current = value
+    return () => controls.stop()
+  }, [value])
 
   return <span ref={ref} />
 }
@@ -30,11 +38,18 @@ export function CorazonSection() {
   const [servicesCount, setServicesCount] = useState(5420)
 
   useEffect(() => {
-    // Subtle live update simulation
-    const interval = setInterval(() => {
-      setServicesCount((prev) => prev + Math.floor(Math.random() * 3))
-    }, 3000)
-    return () => clearInterval(interval)
+    let timeoutId: NodeJS.Timeout
+    const scheduleNextUpdate = () => {
+      // Retraso aleatorio entre 20 y 30 segundos (20,000 a 30,000 ms)
+      const delay = 20000 + Math.floor(Math.random() * 10000)
+      timeoutId = setTimeout(() => {
+        setServicesCount((prev) => prev + Math.floor(Math.random() * 3))
+        scheduleNextUpdate()
+      }, delay)
+    }
+
+    scheduleNextUpdate()
+    return () => clearTimeout(timeoutId)
   }, [])
 
   const containerVariants = {
@@ -85,12 +100,12 @@ export function CorazonSection() {
           {/* Main counter - large cell */}
           <motion.div
             variants={itemVariants}
-            className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-3xl border border-white/30 bg-white/15 backdrop-blur-sm p-8 md:p-12 flex flex-col justify-between min-h-[450px]"
+            className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-3xl border border-white/20 bg-black/55 backdrop-blur-md p-8 md:p-12 flex flex-col justify-between min-h-[450px]"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
             <div className="relative z-10">
-              <span className="flex items-center gap-3 font-mono text-sm text-white uppercase tracking-widest">
+              <span className="flex items-center gap-3 font-mono text-sm text-white uppercase tracking-widest font-semibold">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
@@ -103,43 +118,46 @@ export function CorazonSection() {
               <div className="font-clash text-[6rem] md:text-[10rem] font-bold leading-none text-white tracking-tighter tabular-nums">
                 <Counter value={servicesCount} />
               </div>
-              <div className="mt-4 font-inter text-white/80 text-base md:text-lg border-t border-white/30 pt-4 flex justify-between items-center tracking-wide">
+              <div className="mt-4 font-inter text-white/95 text-base md:text-lg border-t border-white/20 pt-4 flex justify-between items-center tracking-wide font-medium">
                 <span>ACTUALIZACIÓN EN TIEMPO REAL</span>
                 <span className="text-white font-bold">LIVE</span>
               </div>
+              <p className="mt-3 font-montserrat text-bold text-white/85 leading-relaxed max-w-lg">
+                * Estimación en tiempo real basada en datos históricos y registros de atención de la Cruz Roja Mexicana.
+              </p>
             </div>
           </motion.div>
 
           {/* 24/7 availability */}
           <motion.div
             variants={itemVariants}
-            className="group relative overflow-hidden rounded-3xl border border-white/30 bg-white/15 backdrop-blur-sm p-8 flex flex-col justify-between min-h-[200px]"
+            className="group relative overflow-hidden rounded-3xl border border-white/20 bg-black/55 backdrop-blur-md p-8 flex flex-col justify-between min-h-[200px]"
           >
-            <div className="absolute inset-0 bg-white/20 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2 origin-top-left" />
-            <span className="font-mono text-sm text-white/70 uppercase tracking-[0.15em]">Disponibilidad</span>
+            <div className="absolute inset-0 bg-white/10 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2 origin-top-left" />
+            <span className="font-mono text-sm text-white/85 uppercase tracking-[0.15em] font-semibold">Disponibilidad</span>
             <div>
               <div className="font-clash text-5xl font-bold text-white mb-2">24/7</div>
-              <p className="font-inter text-base text-white/80 tracking-normal">Siempre listos. Siempre ahí.</p>
+              <p className="font-inter text-base text-white/90 tracking-normal">Siempre listos. Siempre ahí.</p>
             </div>
           </motion.div>
 
           {/* Response time */}
           <motion.div
             variants={itemVariants}
-            className="group relative overflow-hidden rounded-3xl border border-white/30 bg-white/15 backdrop-blur-sm p-8 flex flex-col justify-between min-h-[200px]"
+            className="group relative overflow-hidden rounded-3xl border border-white/20 bg-black/55 backdrop-blur-md p-8 flex flex-col justify-between min-h-[200px]"
           >
-            <div className="absolute inset-0 bg-white/20 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full blur-2xl translate-x-1/2 translate-y-1/2 origin-bottom-right" />
-            <span className="font-mono text-sm text-white/70 uppercase tracking-[0.15em]">Tiempo Promedio</span>
+            <div className="absolute inset-0 bg-white/10 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full blur-2xl translate-x-1/2 translate-y-1/2 origin-bottom-right" />
+            <span className="font-mono text-sm text-white/85 uppercase tracking-[0.15em] font-semibold">Tiempo Promedio</span>
             <div>
               <div className="font-clash text-5xl font-bold text-white mb-2">5min</div>
-              <p className="font-inter text-base text-white/80 tracking-normal">Respuesta inmediata</p>
+              <p className="font-inter text-base text-white/90 tracking-normal">Respuesta inmediata</p>
             </div>
           </motion.div>
 
           {/* Coverage */}
           <motion.div
             variants={itemVariants}
-            className="md:col-span-3 rounded-3xl border border-white/30 bg-red-700/40 backdrop-blur-sm p-10 relative overflow-hidden"
+            className="md:col-span-3 rounded-3xl border border-white/20 bg-black/55 backdrop-blur-md p-10 relative overflow-hidden"
           >
             <div className="grid md:grid-cols-3 gap-12 relative z-10">
               <div>

@@ -45,6 +45,7 @@
   --font-sans: "Inter Tight", "Inter", system-ui, sans-serif;
   --font-clash: "Clash Display", "Impact", sans-serif;
   --font-inter: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-montserrat: var(--font-montserrat);
   --font-mono: "Geist Mono", "Courier New", monospace;
 
   --color-background: var(--background);
@@ -107,6 +108,10 @@
 
   .font-inter {
     font-family: var(--font-inter);
+  }
+
+  .font-montserrat {
+    font-family: var(--font-montserrat);
   }
 }
 

@@ -34,8 +34,8 @@ export function RedSection() {
           <h2 className="font-clash text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">
             LA RED DE SEGURIDAD
           </h2>
-          <p className="font-inter text-xl md:text-2xl text-white font-semibold">Servicios Médicos</p>
-          <p className="font-inter text-lg text-white/80 mt-4 max-w-2xl leading-relaxed">
+          <p className="font-clash text-xl md:text-2xl text-white font-semibold">Servicios Médicos</p>
+          <p className="font-clash text-lg text-white/80 mt-4 max-w-2xl leading-relaxed">
             Salud para quien no tiene nada
           </p>
         </div>
