@@ -76,8 +76,8 @@ export function EscudoSection() {
 
   return (
     <section ref={sectionRef} className="min-h-screen py-24 px-6 relative overflow-hidden">
-      {/* Fondo */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-rose-100 via-90% to-red-300" />
+      {/* Fondo rojo oscuro — invertido del claro original */}
+      <div className="absolute inset-0 bg-gradient-to-b from-red-600 from-85% via-red-400 via-95% to-rose-50" />
 
       {/* Grano de textura */}
       <div className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none">
@@ -99,9 +99,9 @@ export function EscudoSection() {
             opacity: 1 - scrollProgress * 0.3,
           }}
         >
-          <h2 className="font-clash text-5xl md:text-7xl font-bold mb-4 leading-tight text-black uppercase tracking-tight">EL ESCUDO</h2>
-          <p className="font-clash text-xl md:text-2xl text-vital font-semibold">Rescate y Desastres</p>
-          <p className="font-clash text-lg text-black/80 mt-4 max-w-2xl leading-relaxed">
+          <h2 className="font-clash text-5xl md:text-7xl font-bold mb-4 leading-tight text-white uppercase tracking-tight">EL ESCUDO</h2>
+          <p className="font-clash text-xl md:text-2xl text-white/90 font-semibold">Rescate y Desastres</p>
+          <p className="font-clash text-lg text-white/80 mt-4 max-w-2xl leading-relaxed">
             Cuando los desastres llegan, nosotros no retrocedemos. Estamos listos para actuar.
           </p>
         </div>
@@ -124,7 +124,7 @@ export function EscudoSection() {
             <CarouselContent>
               {SLIDES.map((slide) => (
                 <CarouselItem key={slide.id}>
-                  <div className="relative rounded-[32px] overflow-hidden shadow-brutal border-4 border-red-300 group">
+                  <div className="relative rounded-[32px] overflow-hidden shadow-brutal border-4 border-white/20 group">
                     <div className="aspect-[16/9] bg-gray-100 relative">
                       <img
                         src={slide.image}
@@ -141,7 +141,7 @@ export function EscudoSection() {
                           whileInView={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.5 }}
                         >
-                          <p className="font-montserrat text-sm md:text-base uppercase tracking-[0.2em] text-vital font-bold mb-2">
+                          <p className="font-montserrat text-sm md:text-base uppercase tracking-[0.2em] text-white font-bold mb-2">
                             {slide.subtitle}
                           </p>
                           <h3 className="font-montserrat text-2xl md:text-6xl font-semibold leading-[0.9] max-w-2xl text-white uppercase italic">
@@ -156,8 +156,8 @@ export function EscudoSection() {
             </CarouselContent>
 
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-4 md:static md:translate-x-0 md:mt-6 md:justify-end">
-              <CarouselPrevious className="static translate-y-0 bg-white border-2 border-vital text-vital hover:bg-vital hover:text-white" />
-              <CarouselNext className="static translate-y-0 bg-white border-2 border-vital text-vital hover:bg-vital hover:text-white" />
+              <CarouselPrevious className="static translate-y-0 bg-white border-2 border-white text-vital hover:bg-vital hover:text-white" />
+              <CarouselNext className="static translate-y-0 bg-white border-2 border-white text-vital hover:bg-vital hover:text-white" />
             </div>
           </Carousel>
         </div>
@@ -169,15 +169,15 @@ export function EscudoSection() {
             { val: "72h", txt: "Movilización crítica en las primeras horas." },
             { val: "100K+", txt: "Vidas impactadas en situaciones críticas." }
           ].map((stat, i) => (
-            <div key={i} className="bg-vital text-white rounded-[32px] p-8 shadow-brutal border-4 border-red-700 hover:-translate-y-1 transition-transform">
-              <div className="font-montserrat text-5xl md:text-6xl font-bold mb-2">{stat.val}</div>
-              <p className="font-inter text-base opacity-90">{stat.txt}</p>
+            <div key={i} className="bg-white text-black rounded-[32px] p-8 shadow-brutal border-4 border-white hover:-translate-y-1 transition-transform">
+              <div className="font-montserrat text-5xl md:text-6xl font-bold mb-2 text-vital">{stat.val}</div>
+              <p className="font-inter text-base text-black/70">{stat.txt}</p>
             </div>
           ))}
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-[32px] p-8 md:p-12 shadow-brutal border-4 border-red-300">
-          <h3 className="font-montserrat text-3xl md:text-4xl font-bold mb-8 text-black uppercase">Historial de Respuesta</h3>
+        <div className="bg-black/55 backdrop-blur-sm rounded-[32px] p-8 md:p-12 shadow-brutal border-4 border-white/20">
+          <h3 className="font-montserrat text-3xl md:text-4xl font-bold mb-8 text-white uppercase">Historial de Respuesta</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               { t: "Sismos 1985 y 2017", d: "Rescate masivo y reconstrucción emocional." },
@@ -185,9 +185,9 @@ export function EscudoSection() {
               { t: "Explosión de Tlahuelilpan", d: "Triaje de emergencia y apoyo humanitario." },
               { t: "Pandemia COVID-19", d: "Células de atención y traslados de alto riesgo." }
             ].map((item, i) => (
-              <div key={i} className="border-l-4 border-vital pl-6">
-                <p className="font-montserrat font-bold text-xl mb-1 text-black uppercase italic">{item.t}</p>
-                <p className="font-inter text-base text-black/60">{item.d}</p>
+              <div key={i} className="border-l-4 border-white pl-6">
+                <p className="font-montserrat font-bold text-xl mb-1 text-white uppercase italic">{item.t}</p>
+                <p className="font-inter text-base text-white/70">{item.d}</p>
               </div>
             ))}
           </div>

@@ -7,10 +7,10 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { Ambulance, Heart, GraduationCap, Stethoscope, MapPin } from "lucide-react"
 
 const SERVICES = [
-  { icon: Ambulance, label: "Ambulancias 24/7", color: "from-red-500 to-red-600" },
-  { icon: Heart, label: "Banco de Sangre", color: "from-rose-500 to-rose-600" },
-  { icon: GraduationCap, label: "Capacitación", color: "from-pink-500 to-pink-600" },
-  { icon: Stethoscope, label: "Primeros Auxilios", color: "from-red-400 to-red-500" },
+  { icon: Ambulance, label: "Ambulancias 24/7", color: "from-white/90 to-white/70" },
+  { icon: Heart, label: "Banco de Sangre", color: "from-white/90 to-white/70" },
+  { icon: GraduationCap, label: "Capacitación", color: "from-white/90 to-white/70" },
+  { icon: Stethoscope, label: "Primeros Auxilios", color: "from-white/90 to-white/70" },
 ]
 
 interface HeroProps {
@@ -40,20 +40,20 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 overflow-hidden pt-28 sm:pt-20 md:pt-0 pb-12">
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-rose-100 via-90% to-red-300" />
+      <div className="absolute inset-0 bg-gradient-to-b from-red-700 via-red-600 via-90% to-red-500" />
 
-      <motion.div style={{ opacity: gradientOpacity }} className="absolute inset-0 bg-gradient-to-b from-transparent via-rose-200 via-90% to-red-400" />
+      <motion.div style={{ opacity: gradientOpacity }} className="absolute inset-0 bg-gradient-to-b from-transparent via-red-700 via-90% to-red-800" />
 
       <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-red-300/30 rounded-full blur-[100px] sm:blur-[150px] animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-red-400/30 rounded-full blur-[80px] sm:blur-[120px]" />
+        <div className="absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-white/10 rounded-full blur-[100px] sm:blur-[150px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-white/10 rounded-full blur-[80px] sm:blur-[120px]" />
       </motion.div>
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
         <motion.div
           animate={{ scale: [1, 1.03, 1], opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[20rem] sm:w-[30rem] md:w-[40rem] h-[20rem] sm:h-[30rem] md:h-[40rem] rounded-full bg-red-400/25 blur-[80px] sm:blur-[120px]"
+          className="w-[20rem] sm:w-[30rem] md:w-[40rem] h-[20rem] sm:h-[30rem] md:h-[40rem] rounded-full bg-white/10 blur-[80px] sm:blur-[120px]"
         />
       </div>
 
@@ -68,7 +68,7 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
         >
           <div className="relative w-32 h-32 md:w-64 md:h-64 lg:w-80 lg:h-80 transition-all duration-300">
             <Image
-              src="/logoCruzRoja.png"
+              src="/logoBlancoCruzRoja.png"
               alt="Logo Cruz Roja"
               fill
               className="object-contain drop-shadow-2xl"
@@ -97,12 +97,12 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/80 backdrop-blur-md rounded-full border border-red-200 mb-4 sm:mb-6 shadow-sm"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-black/30 backdrop-blur-md rounded-full border border-white/30 mb-4 sm:mb-6 shadow-sm"
           >
-            <MapPin className="w-6 h-6 text-vital" />
-            <span className="text-xs sm:text-sm font-bold text-black/80">Tapachula, Chiapas</span>
+            <MapPin className="w-6 h-6 text-white" />
+            <span className="text-xs sm:text-sm font-bold text-white/90">Tapachula, Chiapas</span>
           </motion.div>
-          <p className="font-inter text-lg sm:text-xl md:text-2xl text-black/80 font-medium mb-2">
+          <p className="font-inter text-lg sm:text-xl md:text-2xl text-white/90 font-medium mb-2">
             El Latido de tu Comunidad
           </p>
         </motion.div>
@@ -111,7 +111,7 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="font-inter text-sm sm:text-base md:text-lg text-black/70 max-w-xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4"
+          className="font-inter text-sm sm:text-base md:text-lg text-white/80 max-w-xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4"
         >
           Cada 12 segundos, alguien necesita ayuda. Nosotros respondemos cuando nadie más puede.
         </motion.p>
@@ -131,11 +131,11 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
               transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
               className="group cursor-pointer"
             >
-              <div className="bg-white/70 backdrop-blur-sm border border-red-200/50 rounded-xl sm:rounded-2xl p-3 sm:p-4 hover:bg-white/90 hover:border-red-300 hover:shadow-lg transition-all min-h-[90px] sm:min-h-[110px] flex flex-col items-center justify-center">
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-1.5 sm:mb-2 rounded-lg sm:rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform`}>
-                  <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              <div className="bg-black/30 backdrop-blur-sm border border-white/20 rounded-xl sm:rounded-2xl p-3 sm:p-4 hover:bg-black/40 hover:border-white/40 hover:shadow-lg transition-all min-h-[90px] sm:min-h-[110px] flex flex-col items-center justify-center">
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-1.5 sm:mb-2 rounded-lg sm:rounded-xl bg-gradient-to-br from-white/90 to-white/70 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform`}>
+                  <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-vital" />
                 </div>
-                <span className="text-[10px] sm:text-xs md:text-sm font-medium text-black/80 leading-tight text-center">{service.label}</span>
+                <span className="text-[10px] sm:text-xs md:text-sm font-medium text-white/90 leading-tight text-center">{service.label}</span>
               </div>
             </motion.div>
           ))}
@@ -148,13 +148,13 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="mb-8 sm:mb-10 inline-block group perspective-1000"
         >
-          <div className="relative bg-white/60 backdrop-blur-xl border border-red-300/40 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.02]">
-            <div className="absolute inset-0 bg-gradient-to-tr from-vital/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative bg-black/40 backdrop-blur-xl border border-white/20 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.02]">
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative z-10">
-              <div className="text-3xl sm:text-4xl md:text-6xl font-bold text-vital font-mono tracking-tighter tabular-nums drop-shadow-sm">
+              <div className="text-3xl sm:text-4xl md:text-6xl font-bold text-white font-mono tracking-tighter tabular-nums drop-shadow-sm">
                 {Math.floor(emergencyCount).toLocaleString()}
               </div>
-              <div className="text-[10px] sm:text-xs md:text-sm font-bold tracking-[0.1em] sm:tracking-[0.15em] uppercase mt-1 sm:mt-2 text-black/70">
+              <div className="text-[10px] sm:text-xs md:text-sm font-bold tracking-[0.1em] sm:tracking-[0.15em] uppercase mt-1 sm:mt-2 text-white/80">
                 Emergencias Atendidas
               </div>
             </div>
@@ -171,7 +171,7 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
           <Button
             onClick={onOpenSimulation}
             size="lg"
-            className="bg-vital hover:bg-vital/90 text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-[0_10px_40px_-10px_rgba(220,38,38,0.5)] transition-all hover:-translate-y-1"
+            className="bg-white hover:bg-white/90 text-vital font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] transition-all hover:-translate-y-1"
           >
             <span className="mr-2 animate-pulse text-base sm:text-lg">🚨</span>
             SIMULAR EMERGENCIA
@@ -182,7 +182,7 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
               onClick={onOpenRouteSimulator}
               size="lg"
               variant="outline"
-              className=" bg-vital text-white hover:bg-vital hover:text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-full transition-all hover:-translate-y-1"
+              className="bg-white text-vital hover:bg-white/90 hover:text-vital font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-full transition-all hover:-translate-y-1"
             >
               <MapPin className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               TIEMPO DE RESPUESTA
@@ -198,7 +198,7 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden sm:flex"
       >
-        <div className="w-px h-8 sm:h-12 bg-gradient-to-b from-vital/50 to-transparent" />
+        <div className="w-px h-8 sm:h-12 bg-gradient-to-b from-white/50 to-transparent" />
       </motion.div>
     </section>
   )

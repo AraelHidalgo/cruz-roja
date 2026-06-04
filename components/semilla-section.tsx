@@ -3,34 +3,32 @@
 export function SemillaSection() {
   return (
     <section className="min-h-screen py-24 px-6 relative overflow-hidden">
-      {/* Gradiente rojo → rosa → blanco MUY sutil (inverso del Hero sutil) */}
-      {/* Opción con transición gradual */}
-      <div className="absolute inset-0 bg-gradient-to-b from-red-600 from-85% via-red-400 via-95% to-rose-50" />
-
+      {/* Gradiente claro (blanco → rosa → rojo) — invertido del rojo original */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-rose-100 via-90% to-red-300" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section header */}
         <div className="mb-16">
-          <h2 className="font-clash text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">LA SEMILLA</h2>
-          <p className="font-montserrat font-semibold text-xl md:text-2xl text-white/90">Capacitación</p>
-          <p className="font-montserrat font-medium text-lg text-white/80 mt-4 max-w-2xl leading-relaxed">
+          <h2 className="font-clash text-5xl md:text-7xl font-bold text-black mb-4 leading-tight">LA SEMILLA</h2>
+          <p className="font-montserrat font-semibold text-xl md:text-2xl text-vital">Capacitación</p>
+          <p className="font-montserrat font-medium text-lg text-black/70 mt-4 max-w-2xl leading-relaxed">
             Tú eres el primer respondiente
           </p>
         </div>
 
         {/* Main message */}
-        <div className="bg-white text-black rounded-[32px] p-8 md:p-16 mb-12 shadow-brutal border-4 border-white">
+        <div className="bg-white/80 text-black rounded-[32px] p-8 md:p-16 mb-12 shadow-brutal border-4 border-red-200">
           <p className="font-montserrat text-3xl md:text-5xl font-bold leading-tight mb-6">
             ¿Sabrías qué hacer si tu ser querido deja de respirar?
           </p>
-          <p className="font-inter text-lg md:text-xl leading-relaxed max-w-3xl text-black/80">
+          <p className="font-inter text-lg md:text-xl leading-relaxed max-w-3xl text-black/70">
             Cada año, miles de vidas se pierden porque nadie sabía RCP. No esperes a necesitarlo. Aprende ahora.
           </p>
         </div>
 
         {/* Training programs - Technical layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          <div className="bg-white/90 backdrop-blur-sm rounded-[32px] p-8 md:p-10 shadow-brutal border-4 border-white hover:translate-x-1 hover:translate-y-1 transition-transform">
+          <div className="bg-white/80 backdrop-blur-sm rounded-[32px] p-8 md:p-10 shadow-brutal border-4 border-red-200 hover:translate-x-1 hover:translate-y-1 transition-transform">
             <div className="flex items-start justify-between mb-6">
               <span className="font-montserrat text-bold uppercase tracking-wider text-black/60 bg-red-100 px-3 py-1 rounded-full">
                 CURSO BÁSICO
@@ -58,7 +56,7 @@ export function SemillaSection() {
             </ul>
           </div>
 
-          <div className="bg-white/90 backdrop-blur-sm rounded-[32px] p-8 md:p-10 shadow-brutal border-4 border-white hover:translate-x-1 hover:translate-y-1 transition-transform">
+          <div className="bg-white/80 backdrop-blur-sm rounded-[32px] p-8 md:p-10 shadow-brutal border-4 border-red-200 hover:translate-x-1 hover:translate-y-1 transition-transform">
             <div className="flex items-start justify-between mb-6">
               <span className="font-montserrat text-bold uppercase tracking-wider text-black/60 bg-red-100 px-3 py-1 rounded-full">
                 CURSO AVANZADO

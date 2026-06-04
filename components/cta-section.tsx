@@ -6,27 +6,30 @@ export function CTASection() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null)
 
   return (
-    <section className="min-h-screen py-24 px-6 bg-white text-black relative flex items-center justify-center overflow-hidden">
+    <section className="min-h-screen py-24 px-6 relative flex items-center justify-center overflow-hidden">
+      {/* Fondo rojo oscuro — invertido del blanco original */}
+      <div className="absolute inset-0 bg-gradient-to-b from-red-600 via-red-700 to-red-800" />
+
       {/* Animated background elements */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-10">
         <div
-          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-red-200 animate-pulse"
+          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-white animate-pulse"
           style={{ animationDuration: "3s" }}
         />
         <div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-red-200 animate-pulse"
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-white animate-pulse"
           style={{ animationDuration: "4s", animationDelay: "1s" }}
         />
       </div>
 
       <div className="max-w-5xl mx-auto text-center relative z-10">
-        <h2 className="font-clash text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight text-black">
+        <h2 className="font-clash text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight text-white">
           Tú mantienes
           <br />
           este latido
         </h2>
 
-        <p className="font-inter text-xl md:text-2xl mb-16 leading-relaxed max-w-3xl mx-auto text-black/80">
+        <p className="font-inter text-xl md:text-2xl mb-16 leading-relaxed max-w-3xl mx-auto text-white/80">
           La Cruz Roja Mexicana no recibe apoyo gubernamental. Somos sostenidos por personas como tú que creen en salvar
           vidas.
         </p>
@@ -36,10 +39,10 @@ export function CTASection() {
           <button
             onMouseEnter={() => setHoveredButton("donar")}
             onMouseLeave={() => setHoveredButton(null)}
-            className="group relative bg-vital text-white font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-brutal-heavy border-4 border-red-700 transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px]"
+            className="group relative bg-white text-vital font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-brutal-heavy border-4 border-white transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px]"
           >
             DONAR AHORA
-            <span className="absolute -top-2 -right-2 bg-red-700 text-white text-xs font-inter px-2 py-1 rounded-full border-2 border-red-700">
+            <span className="absolute -top-2 -right-2 bg-red-900 text-white text-xs font-inter px-2 py-1 rounded-full border-2 border-red-900">
               Urgente
             </span>
           </button>
@@ -47,7 +50,7 @@ export function CTASection() {
           <button
             onMouseEnter={() => setHoveredButton("aprender")}
             onMouseLeave={() => setHoveredButton(null)}
-            className="group relative bg-white text-vital font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-brutal-heavy border-4 border-vital transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px]"
+            className="group relative bg-transparent text-white font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-brutal-heavy border-4 border-white transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px] hover:bg-white/10"
           >
             APRENDER RCP
           </button>
@@ -55,7 +58,7 @@ export function CTASection() {
           <button
             onMouseEnter={() => setHoveredButton("voluntario")}
             onMouseLeave={() => setHoveredButton(null)}
-            className="group relative bg-black text-white font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-brutal-heavy border-4 border-black transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px]"
+            className="group relative bg-white/10 text-white font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-brutal-heavy border-4 border-white/40 transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px] hover:bg-white/20"
           >
             SER VOLUNTARIO
           </button>
@@ -64,26 +67,26 @@ export function CTASection() {
         {/* Impact stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           <div className="text-center">
-            <div className="font-clash text-4xl md:text-5xl font-bold mb-2 text-vital">$100</div>
-            <p className="font-inter text-sm text-black/70 leading-relaxed">Mantienen una ambulancia operando por 1 día</p>
+            <div className="font-clash text-4xl md:text-5xl font-bold mb-2 text-white">$100</div>
+            <p className="font-inter text-sm text-white/70 leading-relaxed">Mantienen una ambulancia operando por 1 día</p>
           </div>
           <div className="text-center">
-            <div className="font-clash text-4xl md:text-5xl font-bold mb-2 text-vital">$500</div>
-            <p className="font-inter text-sm text-black/70 leading-relaxed">
+            <div className="font-clash text-4xl md:text-5xl font-bold mb-2 text-white">$500</div>
+            <p className="font-inter text-sm text-white/70 leading-relaxed">
               Equipan a un paramédico con insumos esenciales
             </p>
           </div>
           <div className="text-center">
-            <div className="font-clash text-4xl md:text-5xl font-bold mb-2 text-vital">$1,000</div>
-            <p className="font-inter text-sm text-black/70 leading-relaxed">
+            <div className="font-clash text-4xl md:text-5xl font-bold mb-2 text-white">$1,000</div>
+            <p className="font-inter text-sm text-white/70 leading-relaxed">
               Capacitan a 50 personas en primeros auxilios
             </p>
           </div>
         </div>
 
         {/* Footer message */}
-        <div className="mt-20 pt-12 border-t-2 border-black/10">
-          <p className="font-inter text-base text-black/70 leading-relaxed">
+        <div className="mt-20 pt-12 border-t-2 border-white/20">
+          <p className="font-inter text-base text-white/70 leading-relaxed">
             Sin ti, México pierde un latido. Con tu ayuda, salvamos vidas cada día.
           </p>
         </div>
