@@ -103,7 +103,7 @@ export function TransfusionServices() {
                 >
                     <div className="text-center mb-6 sm:mb-8">
                         <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">Información</h3>
-                        <p className="text-white/80 text-xs sm:text-base">Banco de Cruz Roja Mexicana - Área de Banco de Sangre</p>
+                        <p className="text-white/80 text-semibold sm:text-base">Banco de Cruz Roja Mexicana - Área de Banco de Sangre</p>
                     </div>
 
                     {/* Doctores */}
@@ -113,7 +113,7 @@ export function TransfusionServices() {
                                 <User className="w-4 h-4 sm:w-5 sm:h-5" />
                                 <span className="font-bold text-sm sm:text-lg">Dr. Valencia / Dra. Cordero</span>
                             </div>
-                            <p className="text-white/80 text-xs sm:text-sm">Médico Especialista y Medicina Transfusional</p>
+                            <p className="text-white/80 text-lg sm:text-lg">Médico Especialista y Medicina Transfusional</p>
                         </div>
                     </div>
 
@@ -126,7 +126,7 @@ export function TransfusionServices() {
                                 className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white hover:text-vital px-3 sm:px-4 py-3 rounded-xl transition-all hover:scale-105 cursor-pointer min-h-[48px]"
                             >
                                 <Phone className="w-4 h-4 flex-shrink-0" />
-                                <span className="font-mono font-medium text-xs sm:text-sm">{phone.number}</span>
+                                <span className="font-mono font-bold text-lg sm:text-lg">{phone.number}</span>
                             </a>
                         ))}
                     </div>

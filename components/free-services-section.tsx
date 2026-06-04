@@ -74,8 +74,8 @@ export function FreeServicesSection() {
           <h2
             className={`font-clash text-4xl sm:text-5xl md:text-8xl font-bold text-black mb-6 sm:mb-8 leading-[0.9] transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
           >
-            <span className="block">NO TODO</span>
-            <span className="block">SE COBRA</span>
+            <span className="block">SERVICIOS</span>
+            <span className="block">GRATUITOS</span>
           </h2>
 
           <p
@@ -92,9 +92,8 @@ export function FreeServicesSection() {
           {freeServices.map((service, index) => (
             <div
               key={service.title}
-              className={`bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-[24px] p-6 sm:p-8 border-4 border-red-300/50 shadow-brutal hover:shadow-brutal-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col items-center text-center ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-              }`}
+              className={`bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-[24px] p-6 sm:p-8 border-4 border-red-300/50 shadow-brutal hover:shadow-brutal-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col items-center text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+                }`}
               style={{
                 transitionDelay: `${600 + index * 100}ms`,
               }}
@@ -103,17 +102,17 @@ export function FreeServicesSection() {
               <div className="text-5xl sm:text-6xl mb-4 sm:mb-6 transform group-hover:scale-110 transition-transform">
                 {service.icon}
               </div>
-              
+
               {/* Título */}
               <h3 className="font-clash text-xl sm:text-2xl font-bold text-black mb-3 leading-tight">
                 {service.title}
               </h3>
-              
+
               {/* Descripción */}
               <p className="font-inter text-sm sm:text-base text-black/70 mb-5 sm:mb-6 leading-relaxed flex-grow">
                 {service.description}
               </p>
-              
+
               {/* Badge de Detalle */}
               <div className="inline-block bg-vital text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-[0.08em] shadow-sm">
                 {service.detail}

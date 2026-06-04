@@ -41,7 +41,7 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 overflow-hidden pt-28 sm:pt-20 md:pt-0 pb-12">
       <div className="absolute inset-0 bg-gradient-to-b from-white via-rose-100 via-90% to-red-300" />
-      
+
       <motion.div style={{ opacity: gradientOpacity }} className="absolute inset-0 bg-gradient-to-b from-transparent via-rose-200 via-90% to-red-400" />
 
       <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
@@ -58,7 +58,7 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto text-center w-full">
-        
+
         {/* --- CONTENEDOR DE LA IMAGEN --- */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -100,7 +100,7 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
             className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/80 backdrop-blur-md rounded-full border border-red-200 mb-4 sm:mb-6 shadow-sm"
           >
             <MapPin className="w-6 h-6 text-vital" />
-            <span className="text-xs sm:text-sm font-medium text-black/80">Tapachula, Chiapas</span>
+            <span className="text-xs sm:text-sm font-bold text-black/80">Tapachula, Chiapas</span>
           </motion.div>
           <p className="font-inter text-lg sm:text-xl md:text-2xl text-black/80 font-medium mb-2">
             El Latido de tu Comunidad
@@ -182,7 +182,7 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
               onClick={onOpenRouteSimulator}
               size="lg"
               variant="outline"
-              className="border-2 border-vital text-vital hover:bg-vital hover:text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-full transition-all hover:-translate-y-1"
+              className=" bg-vital text-white hover:bg-vital hover:text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-full transition-all hover:-translate-y-1"
             >
               <MapPin className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               TIEMPO DE RESPUESTA

@@ -21,7 +21,7 @@ export function PanicButton() {
         return scrollY.on("change", (latest) => {
             const scrolled = latest > 100
             setIsScrolled(scrolled)
-            
+
             // Mostrar tooltip cuando se contrae por primera vez
             if (scrolled && !showTooltip) {
                 setShowTooltip(true)
@@ -52,15 +52,13 @@ export function PanicButton() {
                     initial={{ y: -120 }}
                     animate={{ y: 0 }}
                     transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
-                    className={`fixed z-40 transition-all duration-700 ease-in-out ${
-                        isScrolled 
-                            ? "top-24 sm:top-24 left-2 sm:left-4" 
-                            : "top-24 sm:top-24 left-0 right-0 sm:left-4 sm:right-auto px-2 sm:px-0"
-                    }`}
+                    className={`fixed z-40 transition-all duration-700 ease-in-out ${isScrolled
+                        ? "top-24 sm:top-24 left-2 sm:left-4"
+                        : "top-24 sm:top-24 left-0 right-0 sm:left-4 sm:right-auto px-2 sm:px-0"
+                        }`}
                 >
-                    <div className={`transition-all duration-700 ease-in-out ${
-                        isScrolled ? "relative" : "max-w-4xl sm:max-w-sm mx-auto sm:mx-0"
-                    }`}>
+                    <div className={`transition-all duration-700 ease-in-out ${isScrolled ? "relative" : "max-w-4xl sm:max-w-sm mx-auto sm:mx-0"
+                        }`}>
                         {/* Tooltip cuando está contraído */}
                         <AnimatePresence>
                             {isScrolled && showTooltip && (
@@ -87,20 +85,18 @@ export function PanicButton() {
                             onClick={() => setIsOpen(true)}
                             onMouseEnter={() => isScrolled && setShowTooltip(true)}
                             onMouseLeave={() => setShowTooltip(false)}
-                            className={`bg-gradient-to-r from-vital via-red-600 to-vital text-white shadow-[0_4px_20px_rgba(220,38,38,0.4)] hover:shadow-[0_8px_30px_rgba(220,38,38,0.6)] transition-all duration-700 ease-in-out flex items-center justify-center gap-2 sm:gap-3 group cursor-pointer ${
-                                isScrolled
-                                    ? "w-14 h-14 rounded-full p-0"
-                                    : "w-full sm:w-auto py-3 sm:py-4 px-3 sm:px-6 rounded-xl sm:rounded-2xl min-h-[56px]"
-                            }`}
+                            className={`bg-gradient-to-r from-vital via-red-600 to-vital text-white shadow-[0_4px_20px_rgba(220,38,38,0.4)] hover:shadow-[0_8px_30px_rgba(220,38,38,0.6)] transition-all duration-700 ease-in-out flex items-center justify-center gap-2 sm:gap-3 group cursor-pointer ${isScrolled
+                                ? "w-14 h-14 rounded-full p-0"
+                                : "w-full sm:w-auto py-3 sm:py-4 px-3 sm:px-6 rounded-xl sm:rounded-2xl min-h-[56px]"
+                                }`}
                             aria-label="Abrir panel de emergencia"
                         >
                             {/* Icono del teléfono - siempre visible */}
                             <motion.div
                                 animate={{ scale: [1, 1.2, 1] }}
                                 transition={{ duration: 1, repeat: Infinity }}
-                                className={`bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 ${
-                                    isScrolled ? "w-8 h-8" : "w-10 h-10 sm:w-8 sm:h-8"
-                                }`}
+                                className={`bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 ${isScrolled ? "w-8 h-8" : "w-10 h-10 sm:w-8 sm:h-8"
+                                    }`}
                             >
                                 <Phone className="w-5 h-5" />
                             </motion.div>
@@ -115,7 +111,7 @@ export function PanicButton() {
                                     <div className="font-bold text-sm sm:text-base md:text-lg leading-tight truncate">
                                         ¿EMERGENCIA? LLÁMANOS
                                     </div>
-                                    <div className="text-xs sm:text-sm text-white/90 font-mono truncate">
+                                    <div className="text-xs sm:text-sm text-white/90 font-montserrat font-bold truncate">
                                         962-606-4212 | 962-626-1949
                                     </div>
                                 </motion.div>

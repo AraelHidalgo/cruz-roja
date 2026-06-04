@@ -48,7 +48,7 @@ export default function BancoDeSangrePage() {
                             </div>
 
                             <h1 className="font-clash text-[clamp(3.5rem,9vw,10rem)] font-bold mb-8 leading-[0.9] tracking-tight">
-                                <span className="block text-black">SANTUARIO</span>
+                                <span className="block text-black">BANCO</span>
                                 <span className="block text-transparent bg-clip-text bg-gradient-to-b from-red-600 to-red-900">VITAL</span>
                             </h1>
 
@@ -60,7 +60,7 @@ export default function BancoDeSangrePage() {
                                 <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-12 py-8 rounded-full shadow-[0_0_50px_rgba(220,38,38,0.5)] transition-transform hover:scale-105">
                                     REQUISITOS DE DONACIÓN
                                 </Button>
-                                <Button size="lg" variant="outline" className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-xl px-12 py-8 rounded-full">
+                                <Button size="lg" variant="outline" className="border-2 bg-red-600 hover:bg-red-600 hover:text-white text-white text-xl px-12 py-8 rounded-full">
                                     COSTOS DE RECUPERACIÓN
                                 </Button>
                             </div>

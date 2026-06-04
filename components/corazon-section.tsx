@@ -87,7 +87,7 @@ export function CorazonSection() {
             <h2 className="font-clash text-5xl md:text-8xl font-bold text-white mb-2 tracking-tighter">EL CORAZÓN</h2>
             <div className="h-2 w-full bg-white rounded-full origin-left transform scale-x-50" />
           </motion.div>
-          <motion.p variants={itemVariants} className="font-mono text-lg md:text-xl text-white/95 mt-6 tracking-[0.15em] uppercase">
+          <motion.p variants={itemVariants} className="font-montserrat font-semibold text-lg md:text-xl text-white/95 mt-6 tracking-[0.15em] uppercase">
             Atención Prehospitalaria
           </motion.p>
           <motion.p variants={itemVariants} className="font-inter text-lg md:text-xl text-white/80 mt-4 max-w-xl leading-relaxed tracking-normal">

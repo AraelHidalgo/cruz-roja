@@ -11,9 +11,9 @@ export function SemillaSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section header */}
         <div className="mb-16">
-          <h2 className="font-montserrat text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">LA SEMILLA</h2>
-          <p className="font-inter text-xl md:text-2xl text-white font-semibold">Capacitación</p>
-          <p className="font-inter text-lg text-white/80 mt-4 max-w-2xl leading-relaxed">
+          <h2 className="font-clash text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">LA SEMILLA</h2>
+          <p className="font-montserrat font-semibold text-xl md:text-2xl text-white/90">Capacitación</p>
+          <p className="font-montserrat font-medium text-lg text-white/80 mt-4 max-w-2xl leading-relaxed">
             Tú eres el primer respondiente
           </p>
         </div>
