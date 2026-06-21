@@ -16,9 +16,12 @@ const SERVICES = [
 interface HeroProps {
   onOpenSimulation: () => void
   onOpenRouteSimulator?: () => void
+  title?: string | null
+  content?: string | null
+  imageUrl?: string | null
 }
 
-export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
+export function Hero({ onOpenSimulation, onOpenRouteSimulator, title, content, imageUrl }: HeroProps) {
   const [emergencyCount, setEmergencyCount] = useState(0)
   const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 500], [0, 200])
@@ -68,8 +71,8 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
         >
           <div className="relative w-32 h-32 md:w-64 md:h-64 lg:w-80 lg:h-80 transition-all duration-300">
             <Image
-              src="/logoBlancoCruzRoja.png"
-              alt="Logo Cruz Roja"
+              src={imageUrl || "/logoBlancoCruzRoja.png"}
+              alt="Hero Image"
               fill
               className="object-contain drop-shadow-2xl"
               priority
@@ -102,8 +105,8 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
             <MapPin className="w-6 h-6 text-white" />
             <span className="text-xs sm:text-sm font-bold text-white/90">Tapachula, Chiapas</span>
           </motion.div>
-          <p className="font-inter text-lg sm:text-xl md:text-2xl text-white/90 font-medium mb-2">
-            El Latido de tu Comunidad
+          <p className="font-inter text-lg sm:text-xl md:text-2xl text-white/90 font-medium mb-2 whitespace-pre-wrap">
+            {title || "El Latido de tu Comunidad"}
           </p>
         </motion.div>
 
@@ -111,9 +114,9 @@ export function Hero({ onOpenSimulation, onOpenRouteSimulator }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="font-inter text-sm sm:text-base md:text-lg text-white/80 max-w-xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4"
+          className="font-inter text-sm sm:text-base md:text-lg text-white/80 max-w-xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4 whitespace-pre-wrap"
         >
-          Cada 12 segundos, alguien necesita ayuda. Nosotros respondemos cuando nadie más puede.
+          {content || "Cada 12 segundos, alguien necesita ayuda. Nosotros respondemos cuando nadie más puede."}
         </motion.p>
 
         {/* Servicios */}

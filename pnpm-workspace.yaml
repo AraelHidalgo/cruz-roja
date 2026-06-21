@@ -1,2 +1,6 @@
 allowBuilds:
+  '@prisma/client': set this to true or false
+  '@prisma/engines': true
+  esbuild: set this to true or false
+  prisma: true
   sharp: false
