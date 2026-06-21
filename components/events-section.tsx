@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Calendar, MapPin, Clock, ArrowRight, ImageIcon } from "lucide-react"
+import { Calendar, MapPin, Clock, ArrowRight, ImageIcon, Droplet } from "lucide-react"
 import Image from "next/image"
 import {
   Dialog,
@@ -35,7 +35,7 @@ interface GalleryPost {
 
 interface UnifiedItem {
   id: string
-  type: 'event' | 'post'
+  type: 'event' | 'post' | 'alert'
   date: Date
   title: string
   description: string | null
@@ -46,6 +46,7 @@ interface UnifiedItem {
 interface FeedSectionProps {
   events: Event[]
   posts: GalleryPost[]
+  bloodStock?: Record<string, string>
 }
 
 const getBentoClasses = (index: number, total: number) => {
@@ -65,8 +66,14 @@ const getBentoClasses = (index: number, total: number) => {
   return "col-span-1 row-span-1"
 }
 
-export function EventsSection({ events, posts }: FeedSectionProps) {
+export function EventsSection({ events, posts, bloodStock }: FeedSectionProps) {
   const [selectedItem, setSelectedItem] = useState<UnifiedItem | null>(null)
+
+  const criticalTypes = bloodStock
+    ? Object.entries(bloodStock)
+        .filter(([_, status]) => status === "Critico")
+        .map(([type]) => type)
+    : []
 
   const feedItems: UnifiedItem[] = [
     ...events.map(e => ({
@@ -86,39 +93,49 @@ export function EventsSection({ events, posts }: FeedSectionProps) {
       description: p.text,
       location: null,
       imageUrls: JSON.parse(p.imageUrls) as string[]
+    })),
+    ...criticalTypes.map(type => ({
+      id: `alert-blood-${type}`,
+      type: 'alert' as const,
+      date: new Date(),
+      title: `🚨 Requerimiento Urgente: Sangre ${type}`,
+      description: `La delegación de Tapachula se encuentra en desabasto crítico de sangre tipo ${type}. Si eres de este tipo o compatible, tu donación puede salvar vidas hoy mismo.`,
+      location: 'Banco de Sangre, Tapachula',
+      imageUrls: []
     }))
   ].sort((a, b) => b.date.getTime() - a.date.getTime())
 
   if (feedItems.length === 0) return null
 
   return (
-    <section className="py-24 bg-gray-50 relative overflow-hidden" id="eventos">
+    <section className="py-24 bg-white relative overflow-hidden" id="eventos">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.span 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="block text-sm font-bold tracking-widest text-red-600 uppercase mb-3"
+          >
+            Últimas Novedades
+          </motion.span>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-sm font-bold tracking-widest text-red-600 uppercase mb-3"
-          >
-            Últimas Novedades
-          </motion.h2>
-          <motion.h3 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-6"
+            className="font-clash text-3xl md:text-5xl font-bold text-black mb-6"
           >
             Nuevas Publicaciones y Eventos
-          </motion.h3>
+          </motion.h2>
         </div>
 
         {/* Bento Grid */}
         <div className={`grid grid-cols-1 md:grid-cols-4 gap-4 ${feedItems.length >= 4 ? 'auto-rows-[220px]' : ''}`}>
           {feedItems.map((item, index) => {
             const isFeatured = index % 5 === 0 || feedItems.length < 4
-            const hasImage = item.imageUrls.length > 0
+            const isAlert = item.type === 'alert'
+            const hasImage = item.imageUrls.length > 0 && !isAlert
             
             return (
               <motion.div
@@ -127,7 +144,13 @@ export function EventsSection({ events, posts }: FeedSectionProps) {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className={`group relative rounded-3xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all cursor-pointer flex flex-col justify-between ${getBentoClasses(index, feedItems.length)} ${hasImage ? 'bg-black' : 'bg-white p-6'}`}
+                className={`group relative rounded-[24px] overflow-hidden border-4 transition-all cursor-pointer flex flex-col justify-between ${getBentoClasses(index, feedItems.length)} ${
+                  isAlert 
+                    ? 'border-red-600 bg-red-50 hover:bg-red-100/70 shadow-[6px_6px_0px_0px_rgba(220,38,38,1)] p-6' 
+                    : hasImage 
+                    ? 'border-red-100 hover:border-red-200 hover:shadow-lg bg-black' 
+                    : 'border-red-100 hover:border-red-200 hover:shadow-lg bg-white p-6'
+                }`}
                 onClick={() => setSelectedItem(item)}
               >
                 {/* Background Image para posts */}
@@ -135,7 +158,7 @@ export function EventsSection({ events, posts }: FeedSectionProps) {
                   <>
                     <Image 
                       src={item.imageUrls[0]} 
-                      alt="Cover" 
+                      alt={item.description || item.title} 
                       fill 
                       className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"
                     />
@@ -144,19 +167,30 @@ export function EventsSection({ events, posts }: FeedSectionProps) {
                 )}
 
                 {/* Decoration gradient for featured event items */}
-                {!hasImage && isFeatured && (
+                {!hasImage && !isAlert && isFeatured && (
                   <div className="absolute -right-20 -top-20 w-64 h-64 bg-red-50 rounded-full blur-3xl group-hover:bg-red-100 transition-colors pointer-events-none" />
                 )}
 
                 <div className={`relative z-10 ${hasImage ? 'p-6 h-full flex flex-col justify-end' : ''}`}>
-                  <div className={`flex items-center ${hasImage ? 'text-white/90' : isFeatured ? 'text-red-600' : 'text-gray-500'} mb-4`}>
-                    {item.type === 'event' ? <Calendar className="w-5 h-5 mr-2" /> : <Clock className="w-5 h-5 mr-2" />}
-                    <span className="font-medium text-sm">
-                      {item.date.toLocaleDateString('es-MX', {
-                        day: 'numeric',
-                        month: 'short',
-                        year: isFeatured ? 'numeric' : undefined
-                      })}
+                  <div className={`flex items-center ${hasImage ? 'text-white/90' : isAlert ? 'text-red-600 font-bold' : isFeatured ? 'text-red-600' : 'text-gray-500'} mb-4`}>
+                    {item.type === 'event' ? (
+                      <Calendar className="w-5 h-5 mr-2" />
+                    ) : item.type === 'alert' ? (
+                      <div className="flex items-center gap-1">
+                        <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping inline-block mr-1.5" />
+                        <Droplet className="w-5 h-5 mr-2 fill-red-600 text-red-600" />
+                      </div>
+                    ) : (
+                      <Clock className="w-5 h-5 mr-2" />
+                    )}
+                    <span className="font-bold text-sm tracking-wide uppercase">
+                      {item.type === 'alert' 
+                        ? 'Alerta Crítica' 
+                        : item.date.toLocaleDateString('es-MX', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: isFeatured ? 'numeric' : undefined
+                          })}
                     </span>
                     {item.imageUrls.length > 1 && (
                       <span className="ml-auto flex items-center text-xs bg-black/50 backdrop-blur-md px-2 py-1 rounded-full text-white">
@@ -166,28 +200,32 @@ export function EventsSection({ events, posts }: FeedSectionProps) {
                     )}
                   </div>
                   
-                  <h4 className={`font-bold mb-2 ${hasImage ? 'text-white' : 'text-gray-900'} ${isFeatured || hasImage ? 'text-2xl md:text-3xl line-clamp-3' : 'text-lg line-clamp-2'}`}>
+                  <h4 className={`font-bold mb-2 ${hasImage ? 'text-white' : 'text-gray-900'} ${isFeatured || hasImage || isAlert ? 'text-2xl md:text-3xl line-clamp-3' : 'text-lg line-clamp-2'}`}>
                     {item.title}
                   </h4>
                   
-                  {item.description && (isFeatured || hasImage) && (
-                    <p className={`${hasImage ? 'text-white/80' : 'text-gray-600'} text-sm line-clamp-3 mb-4`}>
+                  {item.description && (isFeatured || hasImage || isAlert) && (
+                    <p className={`${hasImage ? 'text-white/80' : isAlert ? 'text-zinc-700 font-medium' : 'text-gray-600'} text-sm line-clamp-3 mb-4`}>
                       {item.description}
                     </p>
                   )}
                 </div>
 
                 {!hasImage && (
-                  <div className="relative z-10 flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
+                  <div className={`relative z-10 flex items-center justify-between mt-auto pt-4 border-t ${isAlert ? 'border-red-200' : 'border-gray-50'}`}>
                     {item.location ? (
-                      <div className="flex items-center text-gray-500 text-sm max-w-[70%]">
+                      <div className={`flex items-center ${isAlert ? 'text-red-700 font-bold' : 'text-gray-500'} text-sm max-w-[70%]`}>
                         <MapPin className="w-4 h-4 mr-1 flex-shrink-0" />
                         <span className="truncate">{item.location}</span>
                       </div>
                     ) : (
                       <div></div>
                     )}
-                    <div className="w-8 h-8 rounded-full bg-red-50 text-red-600 flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                      isAlert 
+                        ? 'bg-red-600 text-white hover:bg-red-700' 
+                        : 'bg-red-50 text-red-600 group-hover:bg-red-600 group-hover:text-white'
+                    }`}>
                       <ArrowRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -251,19 +289,33 @@ export function EventsSection({ events, posts }: FeedSectionProps) {
                   {/* Date & Time */}
                   <div className="flex items-start">
                     <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 mr-4 text-red-600">
-                      {selectedItem.type === 'event' ? <Calendar className="w-5 h-5" /> : <Clock className="w-5 h-5" />}
+                      {selectedItem.type === 'event' ? (
+                        <Calendar className="w-5 h-5" />
+                      ) : selectedItem.type === 'alert' ? (
+                        <Droplet className="w-5 h-5 fill-red-600 text-red-600 animate-pulse" />
+                      ) : (
+                        <Clock className="w-5 h-5" />
+                      )}
                     </div>
                     <div>
                       <p className="text-sm text-gray-500 font-medium">
-                        {selectedItem.type === 'event' ? 'Fecha del Evento' : 'Publicado el'}
+                        {selectedItem.type === 'event' 
+                          ? 'Fecha del Evento' 
+                          : selectedItem.type === 'alert' 
+                          ? 'Gravedad de Alerta' 
+                          : 'Publicado el'}
                       </p>
-                      <p className="text-gray-900 font-medium">
-                        {selectedItem.date.toLocaleDateString('es-MX', {
-                          weekday: 'long',
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
+                      <p className="text-gray-900 font-bold">
+                        {selectedItem.type === 'alert' ? (
+                          'CRÍTICA (URGENTE)'
+                        ) : (
+                          selectedItem.date.toLocaleDateString('es-MX', {
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          })
+                        )}
                       </p>
                       {selectedItem.type === 'event' && (
                         <p className="text-gray-600">
@@ -293,11 +345,29 @@ export function EventsSection({ events, posts }: FeedSectionProps) {
                   {selectedItem.description && (
                     <div className="pt-6 border-t border-gray-100">
                       <p className="text-sm text-gray-500 font-medium mb-2">
-                        {selectedItem.type === 'event' ? 'Acerca de este evento' : 'Detalles'}
+                        {selectedItem.type === 'event' 
+                          ? 'Acerca de este evento' 
+                          : selectedItem.type === 'alert' 
+                          ? 'Detalles de la Emergencia' 
+                          : 'Detalles'}
                       </p>
                       <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
                         {selectedItem.description}
                       </p>
+                    </div>
+                  )}
+
+                  {/* Action CTA for Alerts */}
+                  {selectedItem.type === 'alert' && (
+                    <div className="pt-6 border-t border-gray-100 flex justify-end">
+                      <a 
+                        href="/banco-de-sangre" 
+                        onClick={() => setSelectedItem(null)}
+                        className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-sm"
+                      >
+                        Ir a Donar Ahora
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
                     </div>
                   )}
                 </div>

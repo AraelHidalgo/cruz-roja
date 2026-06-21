@@ -1,7 +1,8 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 
@@ -17,7 +18,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
+  const lastScrollYRef = useRef(0)
 
   // Actualizar sección activa basado en la ruta
   useEffect(() => {
@@ -33,7 +34,7 @@ export function Navbar() {
       const currentScrollY = window.scrollY
       
       // Hide navbar when scrolling down, show when scrolling up
-      if (currentScrollY > lastScrollY && currentScrollY > 200) {
+      if (currentScrollY > lastScrollYRef.current && currentScrollY > 200) {
         setIsVisible(false)
       } else {
         setIsVisible(true)
@@ -41,20 +42,22 @@ export function Navbar() {
       
       // Check if scrolled past hero
       setIsScrolled(currentScrollY > 50)
-
-      setLastScrollY(currentScrollY)
+      lastScrollYRef.current = currentScrollY
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+  }, [])
 
-  // Exponer el estado del menú móvil globalmente
+  // Close mobile menu on Escape key
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      (window as any).__mobileMenuOpen = isMobileMenuOpen
-      window.dispatchEvent(new CustomEvent('mobileMenuToggle', { detail: isMobileMenuOpen }))
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false)
+      }
     }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
   }, [isMobileMenuOpen])
 
   return (
@@ -71,12 +74,13 @@ export function Navbar() {
               href="/"
               className="flex items-center gap-3 group transition-transform hover:scale-105"
             >
-              <img
+              <Image
                 src="/logoCruzRoja.png"
-                alt="Cruz Roja Mexicana"
+                alt="Cruz Roja Mexicana Delegación Tapachula"
                 width={128}
                 height={128}
                 className="transition-transform group-hover:scale-105"
+                priority
               />
               <div className="hidden md:flex flex-col">
                 <span className="font-inter text-xl font-bold text-black leading-tight">
@@ -119,9 +123,10 @@ export function Navbar() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden p-2 text-red-600 hover:text-red-700 transition-colors"
-              aria-label="Toggle menu"
+              aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={isMobileMenuOpen}
             >
-              {isMobileMenuOpen ? <X size={28} strokeWidth={2.5} /> : <Menu size={28} strokeWidth={2.5} />}
+              {isMobileMenuOpen ? <X size={28} strokeWidth={2.5} aria-hidden="true" /> : <Menu size={28} strokeWidth={2.5} aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -129,9 +134,9 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
-          <div className="absolute top-20 left-0 right-0 bg-gradient-to-b from-white via-white/98 to-white/95 backdrop-blur-md border-b border-black/5 shadow-lg">
+        <div className="fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} aria-hidden="true" />
+          <nav className="absolute top-20 left-0 right-0 bg-gradient-to-b from-white via-white/98 to-white/95 backdrop-blur-md border-b border-black/5 shadow-lg">
             <div className="flex flex-col p-4 gap-2">
               {sections.map((section) => (
                 <Link
@@ -156,7 +161,7 @@ export function Navbar() {
                 DONAR AHORA
               </a>
             </div>
-          </div>
+          </nav>
         </div>
       )}
     </>

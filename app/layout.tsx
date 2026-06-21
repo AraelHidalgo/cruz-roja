@@ -15,10 +15,9 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  title: "El Latido de México | Cruz Roja Mexicana",
+  title: "El Latido de México | Cruz Roja Mexicana Delegación Tapachula",
   description:
-    "La Cruz Roja Mexicana es el latido que mantiene vivo al país. Descubre por qué sin nosotros, el sistema de respuesta colapsa.",
-  generator: "v0.app",
+    "La Cruz Roja Mexicana es el latido que mantiene vivo al país. Ambulancias 24/7, banco de sangre, capacitación y rescate en Tapachula, Chiapas.",
   icons: {
     icon: [
       {
@@ -36,6 +35,26 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-icon.png",
   },
+  openGraph: {
+    title: "El Latido de México | Cruz Roja Mexicana",
+    description: "Ambulancias 24/7, banco de sangre, capacitación y rescate. La Cruz Roja Mexicana Delegación Tapachula responde cuando nadie más puede.",
+    type: "website",
+    locale: "es_MX",
+    images: [
+      {
+        url: "/logoCruzRoja.png",
+        width: 800,
+        height: 800,
+        alt: "Cruz Roja Mexicana Delegación Tapachula",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "El Latido de México | Cruz Roja Mexicana",
+    description: "Ambulancias 24/7, banco de sangre, capacitación y rescate en Tapachula, Chiapas.",
+    images: ["/logoCruzRoja.png"],
+  },
 }
 
 export default function RootLayout({
@@ -46,9 +65,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" rel="stylesheet" />
       </head>
       <body className={`${interTight.variable} ${montserrat.variable} font-inter antialiased`}>

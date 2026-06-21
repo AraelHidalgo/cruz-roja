@@ -66,18 +66,7 @@ export function VoluntariosSection() {
       className="py-24 sm:py-32 px-6 relative overflow-hidden bg-white"
     >
       {/* Fondo con gradiente suave y luminoso de transición */}
-      <div className="absolute inset-0 bg-gradient-to-b from-red-200 via-rose-50/50 to-white" />
-
-      {/* Textura de grano sutil */}
-      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='6' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' /%3E%3C/svg%3E")`,
-            backgroundSize: "200px",
-          }}
-        />
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-rose-50 to-white" />
 
       <motion.div
         variants={containerVariants}
@@ -126,7 +115,7 @@ export function VoluntariosSection() {
               <motion.div
                 key={req.title}
                 variants={itemVariants}
-                className="bg-white/95 backdrop-blur-sm rounded-[28px] p-8 border-4 border-black/10 shadow-brutal hover:shadow-brutal-heavy hover:border-vital/80 hover:-translate-x-1.5 hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-start group cursor-default"
+                className="bg-white rounded-[28px] p-8 border-4 border-black/10 shadow-brutal hover:shadow-brutal-heavy hover:border-vital/80 hover:-translate-x-1.5 hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-start group cursor-default"
               >
                 {/* Contenedor del Icono con efecto hover amigable */}
                 <div className="w-16 h-16 rounded-2xl bg-vital/5 border-2 border-vital/20 flex items-center justify-center mb-6 text-vital group-hover:scale-110 group-hover:bg-vital group-hover:text-white transition-all duration-300">
@@ -150,7 +139,7 @@ export function VoluntariosSection() {
         {/* Énfasis Inferior / CTA Interno - Diseño amigable en tonos rojos claros y bordes nítidos */}
         <motion.div
           variants={itemVariants}
-          className="bg-rose-50/80 backdrop-blur-sm text-black rounded-[32px] p-8 sm:p-12 shadow-brutal border-4 border-vital/30 max-w-4xl mx-auto text-center"
+          className="bg-rose-50 text-black rounded-[32px] p-8 sm:p-12 shadow-brutal border-4 border-vital/30 max-w-4xl mx-auto text-center"
         >
           <h4 className="font-clash text-2xl sm:text-4xl font-bold mb-4 uppercase leading-none text-black">
             ¿Cumples con el perfil?

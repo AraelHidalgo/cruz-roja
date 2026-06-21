@@ -3,6 +3,20 @@
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import {
+  Siren,
+  Phone,
+  Ambulance,
+  Activity,
+  Syringe,
+  Building2,
+  CheckCircle2,
+  Car,
+  HelpCircle,
+  Clock,
+  Brain,
+  HeartOff
+} from "lucide-react"
 
 type Step = {
   id: number
@@ -92,7 +106,9 @@ export function EmergencySimulation({ isOpen, onClose }: EmergencySimulationProp
       }`}
     >
       <div className="space-y-4">
-        <div className="text-6xl mb-4 animate-pulse">🚨</div>
+        <div className="text-6xl mb-4 animate-pulse text-vital flex justify-center">
+          <Siren className="w-16 h-16" />
+        </div>
         <h2 className="font-clash text-5xl md:text-7xl font-bold text-vital drop-shadow-[0_0_30px_rgba(215,25,32,0.6)]">
           {simulationSteps[0].title}
         </h2>
@@ -137,12 +153,12 @@ export function EmergencySimulation({ isOpen, onClose }: EmergencySimulationProp
 
   const renderWithRedCross = () => {
     const steps = [
-      { time: "00:30", event: "Conexión con Centro de Despacho", icon: "📞" },
-      { time: "00:45", event: "Paramédicos en ruta con equipo especializado", icon: "🚑" },
-      { time: "03:20", event: "Llegada. Evaluación vital inmediata", icon: "⚕️" },
-      { time: "04:15", event: "Estabilización con oxígeno y monitoreo cardíaco", icon: "💉" },
-      { time: "06:00", event: "Traslado seguro al hospital", icon: "🏥" },
-      { time: "08:30", event: "Paciente estable. Vida salvada.", icon: "✅" },
+      { time: "00:30", event: "Conexión con Centro de Despacho", icon: Phone },
+      { time: "00:45", event: "Paramédicos en ruta con equipo especializado", icon: Ambulance },
+      { time: "03:20", event: "Llegada. Evaluación vital inmediata", icon: Activity },
+      { time: "04:15", event: "Estabilización con oxígeno y monitoreo cardíaco", icon: Syringe },
+      { time: "06:00", event: "Traslado seguro al hospital", icon: Building2 },
+      { time: "08:30", event: "Paciente estable. Vida salvada.", icon: CheckCircle2 },
     ]
 
     const currentPhaseIndex = Math.floor(timeElapsed / 3)
@@ -168,7 +184,9 @@ export function EmergencySimulation({ isOpen, onClose }: EmergencySimulationProp
                   : "bg-white/30 border-black/10 opacity-40 translate-x-4"
               }`}
             >
-              <div className="text-3xl">{step.icon}</div>
+              <div className="text-vital">
+                <step.icon className="w-8 h-8" />
+              </div>
               <div className="flex-1">
                 <div className="font-mono text-sm text-vital font-bold">{step.time}</div>
                 <div className="font-inter text-base text-black">{step.event}</div>
@@ -199,12 +217,12 @@ export function EmergencySimulation({ isOpen, onClose }: EmergencySimulationProp
 
   const renderWithoutRedCross = () => {
     const scenarios = [
-      { time: "00:30", event: "Llamas al 911... línea ocupada", icon: "📞" },
-      { time: "02:00", event: "Intentas llevarlo en tu auto. ¿Sabes cómo moverlo?", icon: "🚗" },
-      { time: "05:00", event: "¿Qué hospital está abierto? ¿Cómo lo estabilizas?", icon: "❓" },
-      { time: "08:00", event: "Finalmente encuentras ayuda, pero es tarde...", icon: "⏰" },
-      { time: "12:00", event: "Daño cerebral irreversible por falta de oxígeno", icon: "🧠" },
-      { time: "15:00", event: "Una vida que se pudo salvar.", icon: "💔" },
+      { time: "00:30", event: "Llamas al 911... línea ocupada", icon: Phone },
+      { time: "02:00", event: "Intentas llevarlo en tu auto. ¿Sabes cómo moverlo?", icon: Car },
+      { time: "05:00", event: "¿Qué hospital está abierto? ¿Cómo lo estabilizas?", icon: HelpCircle },
+      { time: "08:00", event: "Finalmente encuentras ayuda, pero es tarde...", icon: Clock },
+      { time: "12:00", event: "Daño cerebral irreversible por falta de oxígeno", icon: Brain },
+      { time: "15:00", event: "Una vida que se pudo salvar.", icon: HeartOff },
     ]
 
     const currentIndex = Math.floor(timeElapsed / 2.5)
@@ -230,7 +248,9 @@ export function EmergencySimulation({ isOpen, onClose }: EmergencySimulationProp
                   : "bg-white/20 border-black/5 opacity-30 translate-x-4"
               }`}
             >
-              <div className="text-3xl grayscale">{scenario.icon}</div>
+              <div className="text-black/60">
+                <scenario.icon className="w-8 h-8" />
+              </div>
               <div className="flex-1">
                 <div className="font-mono text-sm text-black/70 font-bold">{scenario.time}</div>
                 <div className="font-inter text-base text-black/80">{scenario.event}</div>

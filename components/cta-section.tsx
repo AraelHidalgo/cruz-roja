@@ -7,8 +7,8 @@ export function CTASection() {
 
   return (
     <section className="min-h-screen py-24 px-6 relative flex items-center justify-center overflow-hidden">
-      {/* Fondo rojo oscuro — invertido del blanco original */}
-      <div className="absolute inset-0 bg-gradient-to-b from-red-600 via-red-700 to-red-800" />
+      {/* Fresh energetic gradient */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-red-600 via-red-500 to-rose-600" />
 
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-10">
@@ -36,32 +36,33 @@ export function CTASection() {
 
         {/* CTA Buttons - Neo-brutalist style */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-          <button
-            onMouseEnter={() => setHoveredButton("donar")}
-            onMouseLeave={() => setHoveredButton(null)}
-            className="group relative bg-white text-vital font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-brutal-heavy border-4 border-white transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px]"
+          <a
+            href="https://www.cruzrojamexicana.org.mx/donativos"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative bg-white text-red-600 font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-4 border-black transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px] text-center"
           >
             DONAR AHORA
-            <span className="absolute -top-2 -right-2 bg-red-900 text-white text-xs font-inter px-2 py-1 rounded-full border-2 border-red-900">
+            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-inter px-2 py-1 rounded-full border-2 border-black">
               Urgente
             </span>
-          </button>
+          </a>
 
-          <button
-            onMouseEnter={() => setHoveredButton("aprender")}
-            onMouseLeave={() => setHoveredButton(null)}
-            className="group relative bg-transparent text-white font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-brutal-heavy border-4 border-white transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px] hover:bg-white/10"
+          <a
+            href="https://www.cruzrojamexicana.org.mx/capacitacion"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative bg-amber-300 text-black font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-4 border-black transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px] text-center"
           >
             APRENDER RCP
-          </button>
+          </a>
 
-          <button
-            onMouseEnter={() => setHoveredButton("voluntario")}
-            onMouseLeave={() => setHoveredButton(null)}
-            className="group relative bg-white/10 text-white font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-brutal-heavy border-4 border-white/40 transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px] hover:bg-white/20"
+          <a
+            href="#requisitos-voluntarios"
+            className="group relative bg-white text-black font-clash text-xl md:text-2xl font-bold px-10 py-6 rounded-[20px] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-4 border-black transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none min-w-[240px] text-center"
           >
             SER VOLUNTARIO
-          </button>
+          </a>
         </div>
 
         {/* Impact stats */}

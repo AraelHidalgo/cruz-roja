@@ -10,7 +10,7 @@ const components = [
 
 export function ServicesGrid() {
     return (
-        <section className="py-24 px-6 relative overflow-hidden">
+        <section id="costos" className="py-24 px-6 relative overflow-hidden">
             {/* Gradiente blanco → rojo */}
             <div className="absolute inset-0 bg-gradient-to-b from-white via-rose-200 via-60% to-red-400" />
             

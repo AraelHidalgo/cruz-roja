@@ -18,7 +18,7 @@ const requirements = [
 
 export function RequirementsViewer() {
     return (
-        <section className="py-24 px-6 relative overflow-hidden">
+        <section id="requisitos" className="py-24 px-6 relative overflow-hidden">
             {/* Gradiente rojo → blanco */}
             <div className="absolute inset-0 bg-gradient-to-b from-red-600 from-85% via-red-400 via-95% to-rose-50" />
             
